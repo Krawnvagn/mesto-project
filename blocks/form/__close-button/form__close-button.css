@@ -11,3 +11,12 @@
   border: none;
   background-color: transparent;
 }
+
+@media (min-width: 320px) and (max-width: 1280px) {
+    .form__close-button {
+      width: 20px;
+      height: 20px;
+      top: -37px;
+      right: 0px;
+  }
+}

@@ -7,3 +7,13 @@
   line-height: 22px;
   margin: 32px 35px 30px;
 }
+
+@media (min-width: 320px) and (max-width: 1280px) {
+    .form__save {
+      padding-top: 11px;
+      padding-bottom: 14px;
+      font-size: 14px;
+      line-height: 17px;
+      margin: 29px 22px 22px;
+  }
+}

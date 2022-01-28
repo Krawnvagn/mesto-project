@@ -9,3 +9,12 @@
   font-size: 14px;
   line-height: 17px;
 }
+
+@media (min-width: 320px) and (max-width: 1280px) {
+    .form__profile-subtitle {
+      margin-top: 19px;
+      margin-left: 20px;
+      padding-bottom: 8px;
+      margin-right: 22px;
+  }
+}
