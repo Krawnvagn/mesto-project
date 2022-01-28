@@ -1,0 +1,11 @@
+.form__profile-title {
+  margin: 9px 35px;
+  border: none;
+  padding-bottom: 13px;
+  border-bottom: 1px solid black;
+}
+
+.form__profile-title::placeholder {
+  font-size: 14px;
+  line-height: 17px;
+}

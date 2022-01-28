@@ -1,0 +1,11 @@
+.form__profile-subtitle {
+  margin: 16px 35px;
+  border: none;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.form__profile-subtitle::placeholder {
+  font-size: 14px;
+  line-height: 17px;
+}
