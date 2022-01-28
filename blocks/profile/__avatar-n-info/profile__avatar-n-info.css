@@ -1,0 +1,13 @@
+.profile__avatar-n-info {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  align-items: center;
+}
+
+@media (min-width: 320px) and (max-width: 1280px) {
+  .profile__avatar-n-info {
+    flex-direction: column;
+    width: 100%;
+  }
+}

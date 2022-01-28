@@ -1,0 +1,8 @@
+.card__subscribe {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 79px;
+}
