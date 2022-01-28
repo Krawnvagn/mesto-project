@@ -3,6 +3,12 @@
   height: 50px;
   border: 2px solid #ffffff;
   background: #000000;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
 }
 
 @media (min-width: 320px) and (max-width: 1280px) {

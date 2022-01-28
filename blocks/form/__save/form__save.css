@@ -6,6 +6,12 @@
   font-size: 18px;
   line-height: 22px;
   margin: 32px 35px 30px;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.form__save:hover {
+  opacity: 0.6;
 }
 
 @media (min-width: 320px) and (max-width: 1280px) {

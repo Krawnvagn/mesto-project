@@ -3,11 +3,16 @@
   border: none;
   padding-bottom: 13px;
   border-bottom: 1px solid black;
+  cursor: pointer;
 }
 
 .form__profile-title::placeholder {
   font-size: 14px;
   line-height: 17px;
+}
+
+.form__profile-title:focus {
+  outline: none;
 }
 
 @media (min-width: 320px) and (max-width: 1280px) {

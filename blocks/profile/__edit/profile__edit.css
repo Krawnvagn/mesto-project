@@ -6,6 +6,12 @@
   border: 1px solid #ffffff;
   background-position: center;
   background-repeat: no-repeat;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.profile__edit:hover {
+  opacity: 0.6;
 }
 
 @media (min-width: 320px) and (max-width: 1280px) {
