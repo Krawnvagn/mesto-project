@@ -4,6 +4,7 @@
   padding-bottom: 13px;
   border-bottom: 1px solid black;
   cursor: pointer;
+  transition: border-bottom 0.3s;
 }
 
 .form__profile-title::placeholder {
@@ -12,6 +13,7 @@
 }
 
 .form__profile-title:focus {
+  border-bottom: 1px solid grey;
   outline: none;
 }
 
