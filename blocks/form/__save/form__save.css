@@ -8,6 +8,7 @@
   margin: 32px 35px 30px;
   transition: opacity 0.3s;
   cursor: pointer;
+  border: 0;
 }
 
 .form__save:hover {
