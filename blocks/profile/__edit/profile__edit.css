@@ -1,8 +1,8 @@
 .profile__edit {
   width: 24px;
   height: 24px;
-  background-image: url(../../../images/Pen.png);
-  background-color: #000000;
+  background-image: url(../../../images/Pen.svg);
+  background-color: transparent;
   border: 1px solid #ffffff;
   background-position: center;
   background-repeat: no-repeat;
