@@ -16,7 +16,7 @@
   opacity: 0.8;
 }
 
-@media (min-width: 320px) and (max-width: 1280px) {
+@media (min-width: 320px) and (max-width: 1279px) {
     .popup__save {
       padding-top: 11px;
       padding-bottom: 14px;

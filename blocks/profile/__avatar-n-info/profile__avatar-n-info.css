@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-@media (min-width: 320px) and (max-width: 1280px) {
+@media (min-width: 320px) and (max-width: 1279px) {
   .profile__avatar-n-info {
     flex-direction: column;
     width: 100%;

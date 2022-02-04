@@ -8,7 +8,7 @@
   margin-right: 18px;
 }
 
-@media (min-width: 320px) and (max-width: 1280px) {
+@media (min-width: 320px) and (max-width: 1279px) {
   .profile__title {
     font-weight: 400;
     font-size: 27px;

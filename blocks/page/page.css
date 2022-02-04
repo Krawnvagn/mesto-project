@@ -11,7 +11,7 @@
   text-rendering: optimizeLegibility;
 }
 
-@media (min-width: 320px) and (max-width: 1280px)   {
+@media (min-width: 320px) and (max-width: 1279px)   {
   .page {
     padding-top: 28px;
     padding-bottom: 33px;
