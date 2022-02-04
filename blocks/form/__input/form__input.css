@@ -1,27 +1,27 @@
-.form__profile-title {
-  margin: 9px 35px;
+.form__input {
+  margin: 16px 35px;
   border: none;
-  padding-bottom: 13px;
+  padding-bottom: 10px;
   border-bottom: 1px solid black;
   cursor: pointer;
   transition: border-bottom 0.3s;
 }
 
-.form__profile-title::placeholder {
+.form__input::placeholder {
   font-size: 14px;
   line-height: 17px;
 }
 
-.form__profile-title:focus {
-  border-bottom: 1px solid grey;
+.form__input:focus {
   outline: none;
+  border-bottom: 1px solid grey;
 }
 
 @media (min-width: 320px) and (max-width: 1280px) {
-    .form__profile-title {
-      margin-top: 46px;
+    .form__input {
+      margin-top: 19px;
       margin-left: 20px;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
       margin-right: 22px;
   }
 }
