@@ -1,4 +1,4 @@
-.form__save {
+.popup__save {
   background-color: #000000;
   color: #ffffff;
   padding-top: 11px;
@@ -11,12 +11,12 @@
   border: 0;
 }
 
-.form__save:hover {
+.popup__save:hover {
   opacity: 0.6;
 }
 
 @media (min-width: 320px) and (max-width: 1280px) {
-    .form__save {
+    .popup__save {
       padding-top: 11px;
       padding-bottom: 14px;
       font-size: 14px;
