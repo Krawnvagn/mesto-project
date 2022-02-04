@@ -9,10 +9,11 @@
   transition: opacity 0.3s;
   cursor: pointer;
   border: 0;
+  border-radius: 2px;
 }
 
 .popup__save:hover {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 @media (min-width: 320px) and (max-width: 1280px) {
