@@ -13,4 +13,5 @@
 
 * Были применены технологии HTML и CSS а также навыки адаптивной вёрстки.
 
-* [Ссылка на проект в Github Pages](https://github.com/demiz99/mesto-project)
+* [Ссылка на проект в Github](https://github.com/demiz99/mesto-project)
+* [Ссылка на проект в Github Pages](https://krawnvagn.github.io/mesto-project/)

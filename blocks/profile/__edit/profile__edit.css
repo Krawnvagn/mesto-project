@@ -8,9 +8,9 @@
   background-repeat: no-repeat;
   transition: opacity 0.3s;
   cursor: pointer;
+  align-items: center;
+  display: flex;
 }
-
-/* Как реализовать чтобы и в мазиле отображался на основе моей созданной верстки - понятия не имею. Прошу у вас помощи или тут все переверстывать нужно и я сам себя загнал в ловушку */
 
 .profile__edit:hover {
   opacity: 0.6;

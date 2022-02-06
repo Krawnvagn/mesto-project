@@ -18,7 +18,6 @@
 
 @media (min-width: 320px) and (max-width: 1279px) {
     .popup__save {
-      padding-top: 11px;
       padding-bottom: 14px;
       font-size: 14px;
       line-height: 17px;

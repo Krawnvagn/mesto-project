@@ -5,6 +5,8 @@
   border-bottom: 1px solid rgb(0 0 0 / 20%);
   cursor: pointer;
   transition: border-bottom 0.3s;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .popup__input::placeholder {
