@@ -9,7 +9,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  flex-basis: 294px;
 }
 
 @media (min-width: 320px) and (max-width: 1279px) {

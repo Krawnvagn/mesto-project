@@ -1,0 +1,13 @@
+.profile__title-n-edit {
+  display: flex;
+  align-items: center;
+  max-width: 350px;
+}
+
+@media (min-width: 320px) and (max-width: 1279px) {
+  .profile__title-n-edit {
+    align-items: baseline;
+    justify-content: center;
+    max-width: 282px;
+  }
+}
