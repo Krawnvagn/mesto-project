@@ -3,6 +3,9 @@
   line-height: 22px;
   color: #FFFFFF;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (min-width: 320px) and (max-width: 1279px) {
