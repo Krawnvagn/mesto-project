@@ -13,7 +13,7 @@
     font-size: 14px;
     line-height: 17px;
     padding-bottom: 31px;
-    min-width: 282px;
+    max-width: 282px;
     text-align: center;
   }
 }
