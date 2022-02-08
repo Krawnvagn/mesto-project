@@ -5,9 +5,9 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  position: absolute;
-  right: -40px;
-  top: -38px;
+  position: relative;
+  right: -7px;
+  top: -189px;
   border: none;
   background-color: transparent;
   transition: opacity 0.3s;
