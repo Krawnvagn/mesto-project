@@ -5,9 +5,9 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  position: relative;
-  right: -7px;
-  top: -189px;
+  position: absolute;
+  right: -40px;
+  top: -40px;
   border: none;
   background-color: transparent;
   transition: opacity 0.3s;
@@ -19,10 +19,10 @@
 }
 
 @media (min-width: 320px) and (max-width: 1279px) {
-    .popup__close-button {    width: 20px;
+    .popup__close-button {
+      width: 20px;
       height: 20px;
-      top: 87px;
-      right: 19px;
-      position: absolute;
+      top: -36px;
+      right: 0;
   }
 }
