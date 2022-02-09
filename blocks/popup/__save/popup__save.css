@@ -1,15 +1,18 @@
 .popup__save {
   background-color: #000000;
   color: #ffffff;
-  padding-top: 11px;
-  padding-bottom: 12px;
+  padding-top: 14px;
+  padding-bottom: 18px;
   font-size: 18px;
   line-height: 22px;
-  margin: 32px 35px 30px;
   transition: opacity 0.3s;
   cursor: pointer;
   border: 0;
   border-radius: 2px;
+  margin-top: 18px;
+  margin-right: 36px;
+  margin-left: 36px;
+  margin-bottom: 37px;
 }
 
 .popup__save:hover {
@@ -18,12 +21,13 @@
 
 @media (min-width: 320px) and (max-width: 1279px) {
     .popup__save {
-      padding-bottom: 14px;
       font-size: 14px;
+      padding-top: 14px;
       line-height: 17px;
+      padding-bottom: 14px;
       margin-right: 22px;
       margin-left: 22px;
       margin-bottom: 25px;
-      margin-top: 15px;
+      margin-top: 14px;
   }
 }
