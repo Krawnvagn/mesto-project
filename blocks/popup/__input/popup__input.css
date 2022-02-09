@@ -7,8 +7,6 @@
   transition: border-bottom 0.3s;
   font-size: 14px;
   line-height: 17px;
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .popup__input::placeholder {
