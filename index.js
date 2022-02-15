@@ -1,50 +1,42 @@
-let popup = document.querySelector('.form') // Попап
-let openPopup = popup.querySelector('.form__open') // Кнопка открытия попап-а
+// Информация о профиле
+const profileInfo = document.querySelector('.profile__info');
+const profileTitle = profileInfo.querySelector('.profile__title');
+const profileSubTitle = profileInfo.querySelector('.profile__subtitle');
+const profileEdit = profileInfo.querySelector('.profile__edit');
+// Поп-ап
+const popup = document.querySelector('.popup');
+const crossPopup = popup.querySelector('.popup__close-button');
+const nameInput = popup.querySelector('.popup__input_type_user-name');
+const jobInput = popup.querySelector('.popup__input_type_user-job');
 
-let formPopup = document.querySelector('.form__popup') // Попап со всеми внутренностями
-let closeButton = formPopup.querySelector('.form__close-button') // Кнопка закрытия попап-а
-let saveBtn = formPopup.querySelector('.form__save') // Кнопка сохранения
-let nameInput = formPopup.querySelector('.form__profile-title') // Имя профиля
-let jobInput = formPopup.querySelector('.form__profile-subtitle') // Наименование работы
+// Форма
+const formElement = popup.querySelector('.popup__form')
 
-let profileInfo = document.querySelector('.profile__info') // Информация о профиле
-let profileTitle = profileInfo.querySelector('.profile__title') // Имя профиля
-let profileSubtitle = profileInfo.querySelector('.profile__subtitle') // Описание профиля
-let editProfile = profileInfo.querySelector('.profile__edit'); // Кнопка редактирования профиля
+// ф-я вставки значений из profile__title и __subtitle
+function inputTitleSubTitle () {
+  nameInput.value = profileTitle.innerText;
+  jobInput.value = profileSubTitle.innerText;
+}
 
-let cardsLike = document.querySelectorAll('.card__like') // Кнопка лайк
+// ф-я открытия popup
+function openPopup () {
+  popup.classList.add('popup_open');
+  inputTitleSubTitle()
+}
 
-// Функция закрытия попап-а
-closeButton.addEventListener('click', closePopup);
+// ф-я закрытия popup
 function closePopup () {
-  popup.classList.remove('form__open');
+  popup.classList.remove('popup_open');
 }
 
-// Функция открытия попап-а
-editProfile.addEventListener('click', EditProfileButton);
-function EditProfileButton () {
-  popup.classList.add('form__open');
-}
-
-// Функция сохранения введённых данных
-saveBtn.addEventListener('click', btnSaveProfile);
-function btnSaveProfile () {
+// ф-я сохранения данных + закрытие popup
+function formSubmitHandler (evt) {
+  evt.preventDefault();
   profileTitle.textContent = nameInput.value;
-  profileSubtitle.textContent = jobInput.value;
+  profileSubTitle.textContent = jobInput.value;
+  closePopup();
 }
 
-// Валидатор, чтобы вёрстка не слетала в profile__info
-nameInput.oninput = function () {
-  if (nameInput.value.length < 8 && jobInput.value.length < 8) {
-    saveBtn.disabled = true;
-  } else {
-    saveBtn.disabled = false;
-  }
-}
-
-// Лайки
-for (let card of cardsLike) {
-  card.onclick = function () {
-    card.classList.toggle('card__like_active');
-  }
-}
+profileEdit.addEventListener('click', openPopup);
+crossPopup.addEventListener('click', closePopup);
+formElement.addEventListener('submit', formSubmitHandler);
