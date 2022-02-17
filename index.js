@@ -87,27 +87,27 @@ function createCard(name, link) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardTitle = cardElement.querySelector(".card__title");
   const cardPhoto = cardElement.querySelector(".card__photo");
-  const cardLike = cardElement.querySelector('.card__like');
-  const cardDel = cardElement.querySelector('.card__del')
+  const cardLike = cardElement.querySelector(".card__like");
+  const cardDel = cardElement.querySelector(".card__del");
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  cardDel.addEventListener('click', () => {
-    const listItem = cardDel.closest('.card')
+  cardDel.addEventListener("click", () => {
+    const listItem = cardDel.closest(".card");
     listItem.remove();
-  })
-  cardLike.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('card__like_active');
-  })
-  cardPhoto.addEventListener('click', (evt) => {
-    const photoCard = document.querySelector('.popup_photo-card');
-    const titlePhoto = photoCard.querySelector('.popup__title-photo');
-    const linkPhoto = photoCard.querySelector('.popup__photo');
+  });
+  cardLike.addEventListener("click", (evt) => {
+    evt.target.classList.toggle("card__like_active");
+  });
+  cardPhoto.addEventListener("click", (evt) => {
+    const photoCard = document.querySelector(".popup_photo-card");
+    const titlePhoto = photoCard.querySelector(".popup__title-photo");
+    const linkPhoto = photoCard.querySelector(".popup__photo");
     openPopup(photoCard);
     linkPhoto.src = link;
     linkPhoto.alt = name;
     titlePhoto.innerText = name;
-  })
+  });
   return cardElement;
 }
 
@@ -120,5 +120,3 @@ function formSubmitHandlerPhoto(evt) {
 
 formPhoto.addEventListener("submit", formSubmitHandlerPhoto);
 formEdit.addEventListener("submit", formSubmitHandlerEdit);
-
-
