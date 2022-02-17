@@ -19,6 +19,9 @@ const formEdit = popupEdit.querySelector(".popup__form");
 const cardTemplate = document.querySelector("#card").content;
 const cards = document.querySelector(".cards");
 const popups = document.querySelectorAll(".popup");
+const photoCard = document.querySelector(".popup_photo-card");
+const titlePhoto = photoCard.querySelector(".popup__title-photo");
+const linkPhoto = photoCard.querySelector(".popup__photo");
 const initialCards = [
   {
     name: "Архыз",
@@ -48,8 +51,6 @@ const initialCards = [
 
 function openPopup(popup) {
   popup.classList.add("popup_open");
-  nameInput.value = profileTitle.innerText;
-  jobInput.value = profileSubTitle.innerText;
 }
 
 function closePopup(popup) {
@@ -58,6 +59,8 @@ function closePopup(popup) {
 
 profileEdit.addEventListener("click", () => {
   openPopup(popupEdit);
+  nameInput.value = profileTitle.innerText;
+  jobInput.value = profileSubTitle.innerText;
 });
 
 photoAdd.addEventListener("click", () => {
@@ -76,7 +79,7 @@ initialCards.forEach((card) => {
   cards.prepend(createCard(card.name, card.link));
 });
 
-function formSubmitHandlerEdit(evt) {
+function submitFormHandlerEdit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubTitle.textContent = jobInput.value;
@@ -100,9 +103,6 @@ function createCard(name, link) {
     evt.target.classList.toggle("card__like_active");
   });
   cardPhoto.addEventListener("click", (evt) => {
-    const photoCard = document.querySelector(".popup_photo-card");
-    const titlePhoto = photoCard.querySelector(".popup__title-photo");
-    const linkPhoto = photoCard.querySelector(".popup__photo");
     openPopup(photoCard);
     linkPhoto.src = link;
     linkPhoto.alt = name;
@@ -111,12 +111,12 @@ function createCard(name, link) {
   return cardElement;
 }
 
-function formSubmitHandlerPhoto(evt) {
+function submitFormHandlerPhoto(evt) {
   evt.preventDefault();
   cards.prepend(createCard(titleInput.value, linkInput.value));
   closePopup(popupPhoto);
   formPhoto.reset();
 }
 
-formPhoto.addEventListener("submit", formSubmitHandlerPhoto);
-formEdit.addEventListener("submit", formSubmitHandlerEdit);
+formPhoto.addEventListener("submit", submitFormHandlerPhoto);
+formEdit.addEventListener("submit", submitFormHandlerEdit);
