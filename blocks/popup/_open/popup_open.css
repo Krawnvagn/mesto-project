@@ -1,3 +1,6 @@
 .popup_open {
   display: flex;
+  /* Плавное открытие попап- */
+  visibility: visible;
+  opacity: 1;
 }

@@ -1,0 +1,6 @@
+.card__del {
+  position: absolute;
+  right: 20px;
+  top: 21px;
+  cursor: pointer;
+}

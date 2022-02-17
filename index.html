@@ -33,82 +33,17 @@
           </button>
         </section>
         <section class="cards">
-          <div class="card">
-            <img
-              src="./images/kirill-pershin-1088404-unsplash.jpg"
-              alt="Замок"
-              class="card__photo"
-            />
-            <div class="card__subscribe">
-              <h2 class="card__title">Карачаевск</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/kirill-pershin-1404681-unsplash.jpg"
-              alt="Замок"
-              class="card__photo"
-            />
-            <div class="card__subscribe">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/kirill-pershin-1556355-unsplash-1.jpg"
-              alt="Замок"
-              class="card__photo"
-            />
-            <div class="card__subscribe">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/kirill-pershin-1404681-unsplash.jpg"
-              alt="Замок"
-              class="card__photo"
-            />
-            <div class="card__subscribe">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/kirill-pershin-1556355-unsplash-1.jpg"
-              alt="Замок"
-              class="card__photo"
-            />
-            <div class="card__subscribe">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/kirill-pershin-1088404-unsplash.jpg"
-              alt="Замок"
-              class="card__photo"
-            />
-            <div class="card__subscribe">
-              <h2 class="card__title">Карачаево-Черкесская республика</h2>
-              <button type="button" class="card__like"></button>
-            </div>
-          </div>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__text">© 2022 Mesto Russia</p>
       </footer>
-      <div class="popup">
+      <!-- Поп-ап с редактированием профиля -->
+      <div class="popup popup_edit">
           <div class="popup__container">
             <button type="button" class="popup__close-button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="myForm">
+            <form class="popup__form" name="myFormEdit">
               <input
                 class="popup__input popup__input_type_user-name"
                 placeholder="Жак-Ив Кусто"
@@ -125,7 +60,52 @@
             </form>
           </div>
       </div>
+      <!-- Поп-ап с добавлением фотографии -->
+      <div class="popup popup_photo">
+          <div class="popup__container">
+            <button type="button" class="popup__close-button"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" name="myFormPhoto">
+              <input
+                class="popup__input popup__input_type_name-photo"
+                placeholder="Название"
+                type="text"
+                name="title-name"
+              />
+              <input
+                class="popup__input popup__input_type_link"
+                placeholder="Ссылка на картинку"
+                type="text"
+                name="photo-name"
+              />
+              <button type="submit" class="popup__save">Создать</button>
+            </form>
+          </div>
+      </div>
+      <!-- Поп-ап с фотографией -->
+      <div class="popup popup_photo-card">
+        <div class="popup__container-photo">
+          <button type="button" class="popup__close-button"></button>
+          <img src="" alt="" class="popup__photo">
+          <h2 class="popup__title-photo"></h2>
+        </div>
+      </div>
     </div>
+    <!-- Темплейт карточки -->
+    <template id="card">
+      <div class="card">
+        <img
+          src=""
+          alt=""
+          class="card__photo"
+        />
+        <div class="card__subscribe">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like"></button>
+        </div>
+        <img src="./images/trash.svg" alt="Удалить" class="card__del">
+      </div>
+    </template>
     <script src="./index.js"></script>
   </body>
 </html>
