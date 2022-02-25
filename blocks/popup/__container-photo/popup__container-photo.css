@@ -1,7 +1,6 @@
 .popup__container-photo {
   flex-direction: column;
   align-items: center;
-  height: 75vh;
   object-fit: contain;
   position: relative;
 }
