@@ -3,7 +3,7 @@
   height: 50px;
   border: 2px solid #ffffff;
   background: transparent;
-  transition: opacity 0.3s;
+  transition: 0.3s;
   cursor: pointer;
   border-radius: 2px;
 }
