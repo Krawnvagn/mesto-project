@@ -72,6 +72,9 @@ popups.forEach((popup) => {
     if (evt.target.classList.contains("popup__close-button")) {
       closePopup(popup);
     }
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
   });
 });
 
