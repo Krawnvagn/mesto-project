@@ -8,6 +8,7 @@
   line-height: 17px;
   padding-left: 0;
   padding-right: 0;
+  width: 100%;
 }
 
 .popup__input:first-child {
@@ -22,6 +23,14 @@
 .popup__input:focus {
   outline: none;
   border-bottom: 1px solid grey;
+}
+
+.popup__input:invalid {
+  border-bottom: 1px solid red;
+}
+
+.popup__input:valid {
+  border-bottom: 1px solid green;
 }
 
 @media (min-width: 320px) and (max-width: 1279px) {

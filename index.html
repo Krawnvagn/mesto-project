@@ -47,19 +47,33 @@
         <div class="popup__container">
           <button type="button" class="popup__close-button"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form" name="myFormEdit">
-            <input
-              class="popup__input popup__input_type_user-name"
-              placeholder="Имя"
-              type="text"
-              name="user-name"
-            />
-            <input
-              class="popup__input popup__input_type_user-job"
-              placeholder="Род деятельности"
-              type="text"
-              name="user-job"
-            />
+          <form class="popup__form" name="myFormEdit" novalidate>
+            <label class="popup__field">
+              <input
+                class="popup__input popup__input_type_user-name"
+                placeholder="Имя"
+                type="text"
+                name="user-name"
+                required
+                id="user-name"
+                minlength="2"
+                maxlength="40"
+              />
+              <span class="popup__input-error user-name-error"></span>
+            </label>
+            <label class="popup__field">
+              <input
+                class="popup__input popup__input_type_user-job"
+                placeholder="Род деятельности"
+                type="text"
+                name="user-job"
+                required
+                id="user-job"
+                minlength="2"
+                maxlength="200"
+              />
+              <span class="popup__input-error user-job-error"></span>
+            </label>
             <button type="submit" class="popup__save">Сохранить</button>
           </form>
         </div>
@@ -69,19 +83,31 @@
         <div class="popup__container">
           <button type="button" class="popup__close-button"></button>
           <h2 class="popup__title">Новое место</h2>
-          <form class="popup__form" name="myFormPhoto">
-            <input
-              class="popup__input popup__input_type_name-photo"
-              placeholder="Название"
-              type="text"
-              name="title-name"
-            />
-            <input
-              class="popup__input popup__input_type_link"
-              placeholder="Ссылка на картинку"
-              type="text"
-              name="photo-name"
-            />
+          <form class="popup__form" name="myFormPhoto" novalidate>
+            <label class="popup__field">
+              <input
+                class="popup__input popup__input_type_name-photo"
+                placeholder="Название"
+                type="text"
+                name="title-name"
+                required
+                id="name-photo"
+                minlength="2"
+                maxlength="30"
+              />
+              <span class="popup__input-error name-photo-error"></span>
+            </label>
+            <label class="popup__field">
+              <input
+                class="popup__input popup__input_type_link"
+                placeholder="Ссылка на картинку"
+                type="url"
+                name="photo-name"
+                required
+                id="link"
+              />
+              <span class="popup__input-error link-error"></span>
+            </label>
             <button type="submit" class="popup__save">Создать</button>
           </form>
         </div>

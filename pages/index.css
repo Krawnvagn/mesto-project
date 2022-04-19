@@ -35,3 +35,9 @@
 @import url(../blocks/popup/__container-photo/popup__container-photo.css);
 @import url(../blocks/popup/__photo/popup__photo.css);
 @import url(../blocks/popup/__title-photo/popup__title-photo.css);
+/* Добавить второй "_" перед _input-error */
+@import url(../blocks/popup/_input-error/popup__input-error.css);
+@import url(../blocks/popup/_input-error/_active/popup__input-error_active.css);
+
+@import url(../blocks/popup/__field/popup__field.css);
+@import url(../blocks/popup/__save/_inactive/popup__save_inactive.css);
