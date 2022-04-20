@@ -1,4 +1,4 @@
-import { enableValidationKeys } from "./index.js";
+import { enableValidationKeys } from "./constants.js";
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
