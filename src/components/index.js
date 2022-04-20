@@ -1,7 +1,7 @@
-import { enableValidation } from "./components/validate.js";
-import { profileEdit, photoAdd, formPhoto, formEdit, popupPhoto, popupEdit, nameInput, profileTitle, jobInput, profileSubTitle } from "./components/utils.js";
-import { submitFormHandlerEdit, openPopup } from "./components/modal.js";
-import { submitFormHandlerPhoto } from "./components/card.js";
+import { enableValidation } from "./validate.js";
+import { profileEdit, photoAdd, formPhoto, formEdit, popupPhoto, popupEdit, nameInput, profileTitle, jobInput, profileSubTitle } from "./utils.js";
+import { submitFormHandlerEdit, openPopup } from "./modal.js";
+import { submitFormHandlerPhoto } from "./card.js";
 
 export const enableValidationKeys = {
   formSelector: ".popup__form",
