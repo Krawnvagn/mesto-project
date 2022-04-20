@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import { enableValidation } from "./validate.js";
 import { profileEdit, photoAdd, formPhoto, formEdit, popupPhoto, popupEdit, nameInput, profileTitle, jobInput, profileSubTitle } from "./utils.js";
 import { submitFormHandlerEdit, openPopup } from "./modal.js";
@@ -10,7 +12,7 @@ export const enableValidationKeys = {
   inactiveButtonClass: "popup__save_inactive",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active",
-};
+}; 
 
 enableValidation();
 

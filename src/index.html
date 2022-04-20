@@ -4,27 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Проект Mesto - интерактивная страница,
-  на которую можно добавлять и удалять фотографии, и ставить лайки"
-    />
-    <meta name="keywords" content="Место, исследователь океана, Жак-Ив Кусто" />
-    <meta name="author" content="demiz99" />
-    <link rel="shortcut icon" href="./images/image.jpg" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto</title>
   </head>
   <body class="body">
     <div class="page">
       <header class="header">
-        <img src="./images/Vector.svg" alt="Логотип" class="header__logo" />
+        <img
+          src="<%=require('./images/Vector.svg')%>"
+          alt="Логотип"
+          class="header__logo"
+        />
       </header>
       <main>
         <section class="profile">
           <div class="profile__avatar-n-info">
             <img
-              src="./images/image.jpg"
+              src="<%=require('./images/image.jpg')%>"
               alt="Старичок"
               class="profile__avatar"
             />
@@ -132,13 +127,12 @@
           <h2 class="card__title"></h2>
           <button type="button" class="card__like"></button>
         </div>
-        <img src="./images/trash.svg" alt="Удалить" class="card__del" />
+        <img
+          src="<%=require('./images/trash.svg')%>"
+          alt="Удалить"
+          class="card__del"
+        />
       </div>
     </template>
-    <script type="module" src="./components/utils.js"></script>
-    <script type="module" src="./components/validate.js"></script>
-    <script type="module" src="./components/modal.js"></script>
-    <script type="module" src="./components/card.js"></script>
-    <script type="module" src="./components/index.js"></script>
   </body>
 </html>
