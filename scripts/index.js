@@ -115,21 +115,35 @@ const enableValidation = () => {
 });
 }
 
-enableValidation()
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}); 
 
 
-function keyHandler (evt, popup) {
+function keyHandler (evt) {
   if (evt.key === "Escape") {
-    closePopup(popup);
+    const currentlyOpenPopup = document.querySelector('.popup_open');
+    closePopup(currentlyOpenPopup);
   }
 };
 
+
+
+// Проектная "Валидация форм в проекте Mesto"
+
 function openPopup(popup) {
   popup.classList.add("popup_open");
+  document.addEventListener('keydown', keyHandler);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_open");
+  document.removeEventListener('keydown', keyHandler);
 }
 
 profileEdit.addEventListener("click", () => {
@@ -143,14 +157,16 @@ photoAdd.addEventListener("click", () => {
 });
 
 popups.forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
+  popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup__close-button")) {
       closePopup(popup);
     }
     if (evt.target === evt.currentTarget) {
       closePopup(popup);
     }
-    if (evt.target.code === 'Escape') {
+  });
+  popup.addEventListener('keydown', (evt) => { 
+    if (evt.target.key === "Escape") {
       closePopup(popup);
     }
   });
