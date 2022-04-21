@@ -1,9 +1,9 @@
 import '../pages/index.css';
 
 import { enableValidation } from "./validate.js";
-import { profileEdit, photoAdd, formPhoto, formEdit, popupPhoto, popupEdit, nameInput, profileTitle, jobInput, profileSubTitle } from "./utils.js";
-import { submitFormHandlerEdit, openPopup } from "./modal.js";
-import { submitFormHandlerPhoto } from "./card.js";
+import { profileEdit, photoAdd, formPhoto, formEdit, popupPhoto, popupEdit, nameInput, profileTitle, jobInput, profileSubTitle, cards, titleInput, linkInput } from "./utils.js";
+import { submitFormHandlerEdit, openPopup, closePopup } from "./modal.js";
+import { createCard } from "./card.js";
 
 enableValidation();
 
@@ -16,6 +16,13 @@ profileEdit.addEventListener("click", () => {
 photoAdd.addEventListener("click", () => {
   openPopup(popupPhoto);
 });
+
+function submitFormHandlerPhoto(evt) {
+  evt.preventDefault();
+  cards.prepend(createCard(titleInput.value, linkInput.value));
+  closePopup(popupPhoto);
+  formPhoto.reset();
+}
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);

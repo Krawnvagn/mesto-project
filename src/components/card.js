@@ -38,7 +38,7 @@ const initialCards = [
   },
 ];
 
-function cardDeleteFunction() {
+function cardDeleteFunction(cardLitter) {
   const listItem = cardLitter.closest(".card");
   listItem.remove();
 }
@@ -57,7 +57,7 @@ function cardPhotoFunction(name, link) {
   //   лучше сначала заменить все данные, а потом показать попап
 }
 
-function createCard(name, link) {
+export function createCard(name, link) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardTitle = cardElement.querySelector(".card__title");
   const cardPhoto = cardElement.querySelector(".card__photo");
@@ -66,7 +66,7 @@ function createCard(name, link) {
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  cardDel.addEventListener("click", cardDeleteFunction);
+  cardDel.addEventListener("click", () => cardDeleteFunction(cardDel));
   cardLike.addEventListener("click", (evt) => cardLikeFunction(evt));
   cardPhoto.addEventListener("click", () => cardPhotoFunction(name, link));
   return cardElement;
@@ -75,10 +75,3 @@ function createCard(name, link) {
 initialCards.forEach((card) => {
   cards.prepend(createCard(card.name, card.link));
 });
-
-export function submitFormHandlerPhoto(evt) {
-  evt.preventDefault();
-  cards.prepend(createCard(titleInput.value, linkInput.value));
-  closePopup(popupPhoto);
-  formPhoto.reset();
-}
