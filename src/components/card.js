@@ -1,17 +1,12 @@
 import {
-  cards,
   cardTemplate,
-  titleInput,
-  linkInput,
-  popupPhoto,
-  formPhoto,
   photoCard,
   linkPhoto,
   titlePhoto,
 } from "./utils.js";
 import { closePopup, openPopup } from "./modal.js";
 
-const initialCards = [
+export const initialCards = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -71,7 +66,3 @@ export function createCard(name, link) {
   cardPhoto.addEventListener("click", () => cardPhotoFunction(name, link));
   return cardElement;
 }
-
-initialCards.forEach((card) => {
-  cards.prepend(createCard(card.name, card.link));
-});

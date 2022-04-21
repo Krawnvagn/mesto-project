@@ -3,7 +3,7 @@ import '../pages/index.css';
 import { enableValidation } from "./validate.js";
 import { profileEdit, photoAdd, formPhoto, formEdit, popupPhoto, popupEdit, nameInput, profileTitle, jobInput, profileSubTitle, cards, titleInput, linkInput } from "./utils.js";
 import { submitFormHandlerEdit, openPopup, closePopup } from "./modal.js";
-import { createCard } from "./card.js";
+import { createCard, initialCards } from "./card.js";
 
 enableValidation();
 
@@ -23,6 +23,10 @@ function submitFormHandlerPhoto(evt) {
   closePopup(popupPhoto);
   formPhoto.reset();
 }
+
+initialCards.forEach((card) => {
+  cards.prepend(createCard(card.name, card.link));
+});
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);
