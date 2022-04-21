@@ -1,5 +1,5 @@
 import { popups, profileTitle, nameInput, profileSubTitle, jobInput, popupEdit, enableValidationKeys } from "./utils.js";
-import { enableValidation } from "./validate.js";
+import { blockSumbitButtonAfterSendForm } from "./validate.js";
 
 export function submitFormHandlerEdit(evt) {
   evt.preventDefault();
@@ -17,21 +17,23 @@ popups.forEach((popup) => {
       closePopup(popup);
     }
   });
-  // popup.addEventListener("keydown", (evt) => {
-  //   if (evt.target.key === "Escape") {
-  //     closePopup(popup);
-  //   }
-  // });
 });
 
 export function openPopup(popup) {
+  const buttonSaveSubmit = popup.querySelector('.popup__save'); /* СРАБОТАЛО! */
+  blockSumbitButtonAfterSendForm(buttonSaveSubmit);
+  // document.querySelector('popup__save').classList.add('.popup__save_inactive'); - не работает
   popup.classList.add("popup_open");
   document.addEventListener("keydown", keyHandler);
+  // if (popup === 'popup__edit' || popup === 'popup__photo') {
+  //   blockSumbitButtonAfterSendForm(enableValidationKeys.submitButtonSelector); - не работает
+  // }
 }
 
 export function closePopup(popup) {
   popup.classList.remove("popup_open");
   document.removeEventListener("keydown", keyHandler);
+  // document.querySelector('popup__save').classList.add('.popup__save_inactive'); - не работает
 }
 
 function keyHandler(evt) {
