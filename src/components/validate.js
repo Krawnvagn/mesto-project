@@ -1,5 +1,9 @@
 import { enableValidationKeys } from "./utils.js";
 
+export function blockSumbitButtonAfterSendForm (buttonSubmit) {
+  buttonSubmit.classList.add(enableValidationKeys.inactiveButtonClass);
+} /* Ревьюер - вопрос к вам: Где вызвать эту функцию не совсем понимаю чтобы было правильно */
+
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(enableValidationKeys.inputErrorClass);
