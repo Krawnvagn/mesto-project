@@ -19,3 +19,12 @@ export const popups = document.querySelectorAll(".popup");
 export const photoCard = document.querySelector(".popup_photo-card");
 export const titlePhoto = photoCard.querySelector(".popup__title-photo");
 export const linkPhoto = photoCard.querySelector(".popup__photo");
+
+export const enableValidationKeys = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__save",
+    inactiveButtonClass: "popup__save_inactive",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__input-error_active",
+  }; 

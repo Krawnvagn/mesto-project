@@ -16,11 +16,11 @@ popups.forEach((popup) => {
       closePopup(popup);
     }
   });
-  popup.addEventListener("keydown", (evt) => {
-    if (evt.target.key === "Escape") {
-      closePopup(popup);
-    }
-  });
+  // popup.addEventListener("keydown", (evt) => {
+  //   if (evt.target.key === "Escape") {
+  //     closePopup(popup);
+  //   }
+  // });
 });
 
 export function openPopup(popup) {
