@@ -1,5 +1,4 @@
-import { popups, profileTitle, nameInput, profileSubTitle, jobInput, popupEdit, enableValidationKeys } from "./utils.js";
-import { blockSumbitButtonAfterSendForm } from "./validate.js";
+import { popups, profileTitle, nameInput, profileSubTitle, jobInput, popupEdit } from "./utils.js";
 
 export function submitFormHandlerEdit(evt) {
   evt.preventDefault();
@@ -20,8 +19,8 @@ popups.forEach((popup) => {
 });
 
 export function openPopup(popup) {
-  const buttonSaveSubmit = popup.querySelector('.popup__save'); /* СРАБОТАЛО! */
-  blockSumbitButtonAfterSendForm(buttonSaveSubmit);
+  // const buttonSaveSubmit = popup.querySelector('.popup__save'); /* СРАБОТАЛО! */
+  // blockSumbitButtonAfterSendForm(buttonSaveSubmit);
   // document.querySelector('popup__save').classList.add('.popup__save_inactive'); - не работает
   popup.classList.add("popup_open");
   document.addEventListener("keydown", keyHandler);

@@ -1,6 +1,6 @@
 import '../pages/index.css';
 
-import { enableValidation } from "./validate.js";
+import { enableValidation, blockSumbitButtonAfterSendForm } from "./validate.js";
 import { profileEdit, photoAdd, formPhoto, formEdit, popupPhoto, popupEdit, nameInput, profileTitle, jobInput, profileSubTitle, cards, titleInput, linkInput } from "./utils.js";
 import { submitFormHandlerEdit, openPopup, closePopup } from "./modal.js";
 import { createCard, initialCards } from "./card.js";
@@ -14,6 +14,8 @@ profileEdit.addEventListener("click", () => {
 });
 
 photoAdd.addEventListener("click", () => {
+  const buttonSaveSubmit = formPhoto.querySelector('.popup__save');
+  blockSumbitButtonAfterSendForm(buttonSaveSubmit);
   openPopup(popupPhoto);
 });
 
