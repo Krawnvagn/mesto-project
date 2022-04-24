@@ -21,7 +21,7 @@ import {
   blockSumbitButtonAfterSendForm,
   enableValidation,
 } from "./validate.js";
-import { loadApiProfile, loadApiCards } from "./api.js";
+import { loadApiProfile, loadApiCards, token } from "./api.js";
 
 loadApiProfile();
 enableValidation();
@@ -53,7 +53,6 @@ function submitFormHandlerPhoto(evt) {
     link: linkInput.value
   })
 });
-
   closePopup(popupPhoto);
   formPhoto.reset();
 }
@@ -64,7 +63,7 @@ function submitFormHandlerPhoto(evt) {
 
 loadApiCards().then((res) => {
   res.forEach((card) => {
-    cards.append(createCard(card.name, card.link, card.likes.length));
+    cards.append(createCard(card.name, card.link, card.likes.length, card._id));
   });
 });
 

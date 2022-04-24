@@ -20,9 +20,8 @@ export const photoCard = document.querySelector(".popup_photo-card");
 export const titlePhoto = photoCard.querySelector(".popup__title-photo");
 export const linkPhoto = photoCard.querySelector(".popup__photo");
 export const profileAvatar = profile.querySelector(".profile__avatar");
-// export const popupSure = document.querySelector(".popup__sure");
-// export const popupConfirmation = popupSure.querySelector(".popup__confirmation")
-// export const postLike = 
+export const popupSure = document.querySelector(".popup__sure");
+export const popupConfirmation = popupSure.querySelector(".popup__confirmation");
 
 export const enableValidationKeys = {
     formSelector: ".popup__form",
