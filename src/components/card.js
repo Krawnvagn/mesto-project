@@ -91,6 +91,9 @@ function cardPhotoFunction(name, link) {
 
 export function createCard(name, link, likes, cardId) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+
+  cardElement.cardId = cardId;
+  
   const cardTitle = cardElement.querySelector(".card__title");
   const cardPhoto = cardElement.querySelector(".card__photo");
   const cardLike = cardElement.querySelector(".card__like");
@@ -100,7 +103,7 @@ export function createCard(name, link, likes, cardId) {
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  cardDel.addEventListener("click", () => cardDeleteFunction(cardDel, cardId));
+  cardDel.addEventListener("click", () => cardDeleteFunction(cardDel, cardElement.cardId));
   cardLike.addEventListener("click", (evt) =>
     cardLikeFunction(evt, cardCountLikes)
   );

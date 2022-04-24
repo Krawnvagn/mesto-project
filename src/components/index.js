@@ -40,19 +40,27 @@ photoAdd.addEventListener("click", () => {
 
 function submitFormHandlerPhoto(evt) {
   evt.preventDefault();
-  cards.prepend(createCard(titleInput.value, linkInput.value, 0));
+  const titleInputActually = popupPhoto.querySelector('.popup__input_type_name-photo').value;
+  const linkInputActually = popupPhoto.querySelector('.popup__input_type_link').value;
 
-  fetch('https://nomoreparties.co/v1/plus-cohort-9/cards', {
-  method: 'POST',
-  headers: {
-    authorization: token,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: titleInput.value,
-    link: linkInput.value
+  fetch("https://nomoreparties.co/v1/plus-cohort-9/cards", {
+    method: "POST",
+    headers: {
+      authorization: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: titleInputActually,
+      link: linkInputActually,
+    }),
   })
-});
+    .then((json) => json.json())
+    .then((result) => {
+      cards.prepend(
+        createCard(titleInputActually, linkInputActually, 0, result._id)
+      );
+    });
+
   closePopup(popupPhoto);
   formPhoto.reset();
 }
@@ -69,4 +77,3 @@ loadApiCards().then((res) => {
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);
-
