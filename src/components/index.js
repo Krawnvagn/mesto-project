@@ -40,12 +40,12 @@ photoAdd.addEventListener("click", () => {
 
 function submitFormHandlerPhoto(evt) {
   evt.preventDefault();
-  cards.prepend(createCard(titleInput.value, linkInput.value));
+  cards.prepend(createCard(titleInput.value, linkInput.value, 0));
 
   fetch('https://nomoreparties.co/v1/plus-cohort-9/cards', {
   method: 'POST',
   headers: {
-    authorization: 'cfb5467c-bf03-4f53-98d0-54d36791533e',
+    authorization: token,
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
@@ -64,9 +64,10 @@ function submitFormHandlerPhoto(evt) {
 
 loadApiCards().then((res) => {
   res.forEach((card) => {
-    cards.append(createCard(card.name, card.link));
+    cards.append(createCard(card.name, card.link, card.likes.length));
   });
 });
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);
+

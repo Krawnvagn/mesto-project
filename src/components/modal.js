@@ -7,6 +7,8 @@ import {
   popupEdit,
 } from "./utils.js";
 
+import { token } from "./api.js";
+
 export function submitFormHandlerEdit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
@@ -14,7 +16,7 @@ export function submitFormHandlerEdit(evt) {
   fetch("https://nomoreparties.co/v1/plus-cohort-9/users/me", {
     method: "PATCH",
     headers: {
-      authorization: "cfb5467c-bf03-4f53-98d0-54d36791533e",
+      authorization: token,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({

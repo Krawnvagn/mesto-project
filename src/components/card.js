@@ -5,6 +5,7 @@ import {
   titlePhoto,
 } from "./utils.js";
 import { closePopup, openPopup } from "./modal.js";
+import { API_URL_CARDS, token } from "./api.js";
 
 export const initialCards = [
   {
@@ -38,8 +39,23 @@ function cardDeleteFunction(cardLitter) {
   listItem.remove();
 }
 
-function cardLikeFunction(evt) {
+function cardLikeFunction(evt, likes) {
   evt.target.classList.toggle("card__like_active");
+
+//   if (evt.target.)
+//     fetch('https://nomoreparties.co/v1/cohortId/users/me', {
+//     method: 'PATCH',
+//     headers: {
+//       authorization: token,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       // name: 'Marie Skłodowska Curie',
+//       // about: 'Physicist and Chemist'
+//       likes: 
+//     })
+// });
+
 }
 
 function cardPhotoFunction(name, link) {
@@ -52,12 +68,14 @@ function cardPhotoFunction(name, link) {
   //   лучше сначала заменить все данные, а потом показать попап
 }
 
-export function createCard(name, link) {
+export function createCard(name, link, likes) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardTitle = cardElement.querySelector(".card__title");
   const cardPhoto = cardElement.querySelector(".card__photo");
   const cardLike = cardElement.querySelector(".card__like");
   const cardDel = cardElement.querySelector(".card__del");
+  const cardCountLikes = cardElement.querySelector(".card__like_count");
+  cardCountLikes.innerText = likes;
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;

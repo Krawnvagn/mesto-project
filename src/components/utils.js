@@ -22,6 +22,7 @@ export const linkPhoto = photoCard.querySelector(".popup__photo");
 export const profileAvatar = profile.querySelector(".profile__avatar");
 // export const popupSure = document.querySelector(".popup__sure");
 // export const popupConfirmation = popupSure.querySelector(".popup__confirmation")
+// export const postLike = 
 
 export const enableValidationKeys = {
     formSelector: ".popup__form",
