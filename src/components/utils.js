@@ -1,4 +1,4 @@
-export const profile = document.querySelector(".profile__info");
+export const profile = document.querySelector(".profile__avatar-n-info");
 export const profileTitle = profile.querySelector(".profile__title");
 export const profileSubTitle = profile.querySelector(".profile__subtitle");
 export const profileEdit = profile.querySelector(".profile__edit");
@@ -19,6 +19,9 @@ export const popups = document.querySelectorAll(".popup");
 export const photoCard = document.querySelector(".popup_photo-card");
 export const titlePhoto = photoCard.querySelector(".popup__title-photo");
 export const linkPhoto = photoCard.querySelector(".popup__photo");
+export const profileAvatar = profile.querySelector(".profile__avatar");
+// export const popupSure = document.querySelector(".popup__sure");
+// export const popupConfirmation = popupSure.querySelector(".popup__confirmation")
 
 export const enableValidationKeys = {
     formSelector: ".popup__form",
@@ -27,4 +30,4 @@ export const enableValidationKeys = {
     inactiveButtonClass: "popup__save_inactive",
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__input-error_active",
-  }; 
+  }

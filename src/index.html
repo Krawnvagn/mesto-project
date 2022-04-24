@@ -119,13 +119,26 @@
         </div>
       </div>
     </div>
+    <!-- Попап "Вы уверены?" -->
+    <!-- <div class="popup popup_sure">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form" name="myFormSure">
+          <button type="submit" class="popup__confirmation">Да</button>
+        </form>
+      </div>
+    </div> -->
     <!-- Темплейт карточки -->
     <template id="card">
       <div class="card">
         <img src="" alt="" class="card__photo" />
         <div class="card__subscribe">
           <h2 class="card__title"></h2>
-          <button type="button" class="card__like"></button>
+          <div class="card__like-n-count">
+            <button type="button" class="card__like"></button>
+            <span class="card__like_count">0</span>
+          </div>
         </div>
         <img
           src="<%=require('./images/trash.svg')%>"

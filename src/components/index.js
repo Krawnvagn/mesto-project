@@ -1,10 +1,29 @@
-import '../pages/index.css';
+import "../pages/index.css";
 
-import { enableValidation, blockSumbitButtonAfterSendForm } from "./validate.js";
-import { profileEdit, photoAdd, formPhoto, formEdit, popupPhoto, popupEdit, nameInput, profileTitle, jobInput, profileSubTitle, cards, titleInput, linkInput } from "./utils.js";
-import { submitFormHandlerEdit, openPopup, closePopup } from "./modal.js";
 import { createCard, initialCards } from "./card.js";
+import { closePopup, openPopup, submitFormHandlerEdit } from "./modal.js";
+import {
+  cards,
+  formEdit,
+  formPhoto,
+  jobInput,
+  linkInput,
+  nameInput,
+  photoAdd,
+  popupEdit,
+  popupPhoto,
+  profileEdit,
+  profileSubTitle,
+  profileTitle,
+  titleInput,
+} from "./utils.js";
+import {
+  blockSumbitButtonAfterSendForm,
+  enableValidation,
+} from "./validate.js";
+import { loadApiProfile, loadApiCards } from "./api.js";
 
+loadApiProfile();
 enableValidation();
 
 profileEdit.addEventListener("click", () => {
@@ -14,7 +33,7 @@ profileEdit.addEventListener("click", () => {
 });
 
 photoAdd.addEventListener("click", () => {
-  const buttonSaveSubmit = formPhoto.querySelector('.popup__save');
+  const buttonSaveSubmit = formPhoto.querySelector(".popup__save");
   blockSumbitButtonAfterSendForm(buttonSaveSubmit);
   openPopup(popupPhoto);
 });
@@ -22,12 +41,31 @@ photoAdd.addEventListener("click", () => {
 function submitFormHandlerPhoto(evt) {
   evt.preventDefault();
   cards.prepend(createCard(titleInput.value, linkInput.value));
+
+  fetch('https://nomoreparties.co/v1/plus-cohort-9/cards', {
+  method: 'POST',
+  headers: {
+    authorization: 'cfb5467c-bf03-4f53-98d0-54d36791533e',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: titleInput.value,
+    link: linkInput.value
+  })
+});
+
   closePopup(popupPhoto);
   formPhoto.reset();
 }
 
-initialCards.forEach((card) => {
-  cards.prepend(createCard(card.name, card.link));
+// initialCards.forEach((card) => {
+//   cards.prepend(createCard(card.name, card.link));
+// });
+
+loadApiCards().then((res) => {
+  res.forEach((card) => {
+    cards.append(createCard(card.name, card.link));
+  });
 });
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
