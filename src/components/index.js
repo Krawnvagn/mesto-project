@@ -16,6 +16,7 @@ import {
   profileSubTitle,
   profileTitle,
   titleInput,
+  enableValidationKeys,
 } from "./utils.js";
 import {
   blockSumbitButtonAfterSendForm,
@@ -38,10 +39,23 @@ photoAdd.addEventListener("click", () => {
   openPopup(popupPhoto);
 });
 
+function renderLoading(isLoading) {
+  if (isLoading) {
+    popupPhoto.querySelector(
+      enableValidationKeys.submitButtonSelector
+    ).innerHTML = "Сохранение...";
+  } else {
+    popupPhoto.querySelector(
+      enableValidationKeys.submitButtonSelector
+    ).innerHTML = "";
+  }
+}
+
 function submitFormHandlerPhoto(evt) {
   evt.preventDefault();
-  const titleInputActually = popupPhoto.querySelector('.popup__input_type_name-photo').value;
-  const linkInputActually = popupPhoto.querySelector('.popup__input_type_link').value;
+  renderLoading(true);
+  const titleInputActually = titleInput.value;
+  const linkInputActually = linkInput.value;
 
   fetch("https://nomoreparties.co/v1/plus-cohort-9/cards", {
     method: "POST",
@@ -59,10 +73,12 @@ function submitFormHandlerPhoto(evt) {
       cards.prepend(
         createCard(titleInputActually, linkInputActually, 0, result._id)
       );
+    })
+    .finally(() => {
+      renderLoading(false);
+      closePopup(popupPhoto);
+      formPhoto.reset();
     });
-
-  closePopup(popupPhoto);
-  formPhoto.reset();
 }
 
 // initialCards.forEach((card) => {
@@ -77,3 +93,4 @@ loadApiCards().then((res) => {
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);
+

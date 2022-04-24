@@ -43,40 +43,41 @@ function cardDeleteFunction(cardLitter, cardId) {
     const listItem = cardLitter.closest(".card");
     listItem.remove();
     closePopup(popupSure);
-    console.log('CARDA', cardId);
-    fetch (`https://nomoreparties.co/v1/plus-cohort-9/cards/${cardId}`, {
+    console.log("CARDA", cardId);
+    fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: token,
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
   });
 }
 
-function cardLikeFunction(evt, likesRef) {
+function cardLikeFunction(evt, likesRef, cardId) {
   evt.target.classList.toggle("card__like_active");
-  // let likesCount = parseInt(
-  //   likesRef.innerText
-  // ); /* parseInt - вытаскиваем число из строки */
-  // if (!evt.target.classList.contains("card__like_active")) {
-  //   likesRef.innerText = likesCount -= 1;
-  // } else {
-  //   likesRef.innerText = likesCount += 1;
-  // }
-
-  // fetch("https://nomoreparties.co/v1/plus-cohort-9/cards", {
-  //   method: "PATCH",
-  //   headers: {
-  //     authorization: token,
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     likes: likesCount,
-  //   }),
-  // }).then((res) => {
-  //   console.log(res);
-  // });
+  let likesCount = parseInt(
+    likesRef.innerText
+  ); /* parseInt - вытаскиваем число из строки */
+  if (!evt.target.classList.contains("card__like_active")) {
+    likesRef.innerText = likesCount -= 1;
+    fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json",
+      },
+    })
+  } else {
+    likesRef.innerText = likesCount += 1;
+    fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json",
+      },
+    })
+  }
 }
 
 function cardPhotoFunction(name, link) {
@@ -93,7 +94,7 @@ export function createCard(name, link, likes, cardId) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
   cardElement.cardId = cardId;
-  
+
   const cardTitle = cardElement.querySelector(".card__title");
   const cardPhoto = cardElement.querySelector(".card__photo");
   const cardLike = cardElement.querySelector(".card__like");
@@ -103,9 +104,11 @@ export function createCard(name, link, likes, cardId) {
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  cardDel.addEventListener("click", () => cardDeleteFunction(cardDel, cardElement.cardId));
+  cardDel.addEventListener("click", () =>
+    cardDeleteFunction(cardDel, cardElement.cardId)
+  );
   cardLike.addEventListener("click", (evt) =>
-    cardLikeFunction(evt, cardCountLikes)
+    cardLikeFunction(evt, cardCountLikes, cardElement.cardId)
   );
   cardPhoto.addEventListener("click", () => cardPhotoFunction(name, link));
   return cardElement;
