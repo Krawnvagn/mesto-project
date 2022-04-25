@@ -7,7 +7,7 @@ import {
   popupConfirmation,
 } from "./utils.js";
 import { closePopup, openPopup } from "./modal.js";
-import { API_URL_CARDS, token } from "./api.js";
+import { API_URL_CARDS, token, apiTokenProfile } from "./api.js";
 
 export const initialCards = [
   {
@@ -36,13 +36,14 @@ export const initialCards = [
   },
 ];
 
-function cardDeleteFunction(evt, cardLitter, cardId) {
-  evt.preventDefault();
+function cardDeleteFunction(cardLitter, cardId) {
   openPopup(popupSure);
-  popupConfirmation.addEventListener("click", () => {
+  popupConfirmation.addEventListener("click", (e) => {
+    e.preventDefault();
     const listItem = cardLitter.closest(".card");
     listItem.remove();
     closePopup(popupSure);
+    console.log("CARDA", cardId);
     fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/${cardId}`, {
       method: "DELETE",
       headers: {
@@ -89,7 +90,7 @@ function cardPhotoFunction(name, link) {
   //   лучше сначала заменить все данные, а потом показать попап
 }
 
-export function createCard(name, link, likes, cardId) {
+export function createCard(name, link, likes, cardId, cardOwner) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
   cardElement.cardId = cardId;
@@ -103,9 +104,13 @@ export function createCard(name, link, likes, cardId) {
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  cardDel.addEventListener("click", (evt) =>
-    cardDeleteFunction(evt, cardDel, cardElement.cardId)
-  );
+  if (cardOwner !== apiTokenProfile._id) {
+    cardDel.remove();
+  } else {
+    cardDel.addEventListener("click", () => {
+      cardDeleteFunction(cardDel, cardElement.cardId);
+    });
+  } 
   cardLike.addEventListener("click", (evt) =>
     cardLikeFunction(evt, cardCountLikes, cardElement.cardId)
   );

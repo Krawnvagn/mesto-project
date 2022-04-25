@@ -14,7 +14,7 @@ const responseCheck = (res) => {
   }
 };
 
-const apiTokenProfile = () => {
+export const apiTokenProfile = () => {
   return fetch(API_URL_USER, {
     headers: {
       authorization: token,
@@ -25,6 +25,7 @@ const apiTokenProfile = () => {
       console.log('Результат АПИ Профиля - ', res);
       return res;
     })
+    .catch(err => console.err(err))
 };
 
 const apiTokenCards = () => {
@@ -38,6 +39,7 @@ const apiTokenCards = () => {
     console.log('Результат АПИ карточек - ', res);
     return res;
   })
+  .catch(err => console.err(err))
 }
 
 export const loadApiCards = () => {
@@ -55,9 +57,6 @@ export const loadApiProfile = () => {
       console.error('Ошибка - ', err);
     });
 };
-
-
-
 
 
 

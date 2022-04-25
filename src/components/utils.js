@@ -26,7 +26,7 @@ export const profilePopup = document.querySelector(".popup_photo-profile");
 export const formPhotoProfile = profilePopup.querySelector(".popup__form");
 
 export const popupSure = document.querySelector(".popup_sure");
-export const popupConfirmation = popupSure.querySelector(".popup__confirmation");
+export const popupConfirmation = popupSure.querySelector(".popup__save");
 
 export const enableValidationKeys = {
     formSelector: ".popup__form",

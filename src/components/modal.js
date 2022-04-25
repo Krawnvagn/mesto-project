@@ -7,8 +7,6 @@ import {
   popupEdit,
 } from "./utils.js";
 
-import { token } from "./api.js";
-
 export function submitFormHandlerEdit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
@@ -16,7 +14,7 @@ export function submitFormHandlerEdit(evt) {
   fetch("https://nomoreparties.co/v1/plus-cohort-9/users/me", {
     method: "PATCH",
     headers: {
-      authorization: token,
+      authorization: "cfb5467c-bf03-4f53-98d0-54d36791533e",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -49,7 +47,7 @@ export function openPopup(popup) {
   // }
 }
 
-export function closePopup(popup) {
+export function closePopup(popup) { 
   popup.classList.remove("popup_open");
   document.removeEventListener("keydown", keyHandler);
   // document.querySelector('popup__save').classList.add('.popup__save_inactive'); - не работает

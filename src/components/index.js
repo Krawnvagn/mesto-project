@@ -122,7 +122,7 @@ function submitFormHandlerPhoto(evt) {
 
 loadApiCards().then((res) => {
   res.forEach((card) => {
-    cards.append(createCard(card.name, card.link, card.likes.length, card._id));
+    cards.append(createCard(card.name, card.link, card.likes.length, card._id, card.owner._id));
   });
 });
 
