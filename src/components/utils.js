@@ -19,9 +19,14 @@ export const popups = document.querySelectorAll(".popup");
 export const photoCard = document.querySelector(".popup_photo-card");
 export const titlePhoto = photoCard.querySelector(".popup__title-photo");
 export const linkPhoto = photoCard.querySelector(".popup__photo");
+
 export const profileAvatar = profile.querySelector(".profile__avatar");
-export const popupSure = document.querySelector(".popup__sure");
-export const popupConfirmation = popupSure.querySelector(".popup__confirmation")
+export const profileAvatarShow = profile.querySelector(".profile__avatar-hover");
+export const profilePopup = document.querySelector(".popup_photo-profile");
+export const formPhotoProfile = profilePopup.querySelector(".popup__form");
+
+export const popupSure = document.querySelector(".popup_sure");
+export const popupConfirmation = popupSure.querySelector(".popup__confirmation");
 
 export const enableValidationKeys = {
     formSelector: ".popup__form",

@@ -34,6 +34,9 @@
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__save/popup__save.css);
 
+/* Корректировка отступа кнопки Сохранить */
+@import url(../blocks/popup/__save-correct/popup__save-correct.css);
+
 /* Кнопка подтверждения "Вы уверены?" */
 @import url(../blocks/popup/__confirmation/popup__confirmation.css);
 

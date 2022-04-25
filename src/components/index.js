@@ -17,6 +17,10 @@ import {
   profileTitle,
   titleInput,
   enableValidationKeys,
+  profilePopup,
+  profileAvatar,
+  profileAvatarShow,
+  formPhotoProfile,
 } from "./utils.js";
 import {
   blockSumbitButtonAfterSendForm,
@@ -26,6 +30,48 @@ import { loadApiProfile, loadApiCards, token } from "./api.js";
 
 loadApiProfile();
 enableValidation();
+
+function renderLoading(isLoading, popup, defaultButtonText) {
+  if (isLoading) {
+    popup.querySelector(
+      enableValidationKeys.submitButtonSelector
+    ).innerHTML = "Сохранение...";
+  } else if (defaultButtonText) {
+    popup.querySelector(
+      enableValidationKeys.submitButtonSelector
+    ).innerHTML = defaultButtonText;
+  }
+}
+
+profileAvatarShow.addEventListener("click", () => {
+  const buttonSaveSubmit = formPhotoProfile.querySelector(".popup__save");
+  blockSumbitButtonAfterSendForm(buttonSaveSubmit);
+  openPopup(profilePopup);
+})
+
+function submitFormHandlerChangePhoto (evt) {
+  evt.preventDefault();
+  const popupSaveDefaultText = profilePopup.querySelector('.popup__save').innerText;
+  renderLoading(true, profilePopup);
+  profileAvatar.src = profilePopup.querySelector('.popup__input_type_link').value;
+
+  fetch(`https://nomoreparties.co/v1/plus-cohort-9/users/me/avatar`, {
+    method: "PATCH",
+    headers: {
+      authorization: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      avatar: profileAvatar.src
+    })
+  })
+    .catch((err) => console.log(`Ошибка `, err))
+    .finally(() => {
+      renderLoading(false, profilePopup, popupSaveDefaultText);
+      closePopup(profilePopup);
+      formPhotoProfile.reset();
+    });
+}
 
 profileEdit.addEventListener("click", () => {
   openPopup(popupEdit);
@@ -39,21 +85,10 @@ photoAdd.addEventListener("click", () => {
   openPopup(popupPhoto);
 });
 
-function renderLoading(isLoading) {
-  if (isLoading) {
-    popupPhoto.querySelector(
-      enableValidationKeys.submitButtonSelector
-    ).innerHTML = "Сохранение...";
-  } else {
-    popupPhoto.querySelector(
-      enableValidationKeys.submitButtonSelector
-    ).innerHTML = "";
-  }
-}
-
 function submitFormHandlerPhoto(evt) {
   evt.preventDefault();
-  renderLoading(true);
+  const popupSaveDefaultText = popupPhoto.querySelector('.popup__save').innerText;
+  renderLoading(true, popupPhoto, popupSaveDefaultText);
   const titleInputActually = titleInput.value;
   const linkInputActually = linkInput.value;
 
@@ -75,7 +110,7 @@ function submitFormHandlerPhoto(evt) {
       );
     })
     .finally(() => {
-      renderLoading(false);
+      renderLoading(false, popupPhoto, popupSaveDefaultText);
       closePopup(popupPhoto);
       formPhoto.reset();
     });
@@ -93,4 +128,5 @@ loadApiCards().then((res) => {
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);
+formPhotoProfile.addEventListener("submit", submitFormHandlerChangePhoto);
 

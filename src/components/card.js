@@ -36,14 +36,13 @@ export const initialCards = [
   },
 ];
 
-function cardDeleteFunction(cardLitter, cardId) {
+function cardDeleteFunction(evt, cardLitter, cardId) {
+  evt.preventDefault();
   openPopup(popupSure);
-  popupConfirmation.addEventListener("click", (e) => {
-    e.preventDefault();
+  popupConfirmation.addEventListener("click", () => {
     const listItem = cardLitter.closest(".card");
     listItem.remove();
     closePopup(popupSure);
-    console.log("CARDA", cardId);
     fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/${cardId}`, {
       method: "DELETE",
       headers: {
@@ -67,7 +66,7 @@ function cardLikeFunction(evt, likesRef, cardId) {
         authorization: token,
         "Content-Type": "application/json",
       },
-    })
+    });
   } else {
     likesRef.innerText = likesCount += 1;
     fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/likes/${cardId}`, {
@@ -76,7 +75,7 @@ function cardLikeFunction(evt, likesRef, cardId) {
         authorization: token,
         "Content-Type": "application/json",
       },
-    })
+    });
   }
 }
 
@@ -104,8 +103,8 @@ export function createCard(name, link, likes, cardId) {
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  cardDel.addEventListener("click", () =>
-    cardDeleteFunction(cardDel, cardElement.cardId)
+  cardDel.addEventListener("click", (evt) =>
+    cardDeleteFunction(evt, cardDel, cardElement.cardId)
   );
   cardLike.addEventListener("click", (evt) =>
     cardLikeFunction(evt, cardCountLikes, cardElement.cardId)
