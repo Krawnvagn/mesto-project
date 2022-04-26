@@ -1,3 +1,4 @@
+import { config } from "./api.js";
 import {
   popups,
   profileTitle,
@@ -5,24 +6,34 @@ import {
   profileSubTitle,
   jobInput,
   popupEdit,
+  formEdit
 } from "./constants.js";
+import { renderLoading } from "./index.js";
 
 export function submitFormHandlerEdit(evt) {
   evt.preventDefault();
-  profileTitle.textContent = nameInput.value;
-  profileSubTitle.textContent = jobInput.value;
-  fetch("https://nomoreparties.co/v1/plus-cohort-9/users/me", {
+  const popupSaveDefaultText =
+    popupEdit.querySelector(".popup__save").innerText;
+  renderLoading(true, popupEdit);
+  fetch(`${config.baseUrl}users/me`, {
     method: "PATCH",
-    headers: {
-      authorization: "cfb5467c-bf03-4f53-98d0-54d36791533e",
-      "Content-Type": "application/json",
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: nameInput.value,
       about: jobInput.value,
     }),
-  });
-  closePopup(popupEdit);
+  })
+    .then((json) => json.json())
+    .then(() => {
+      profileTitle.textContent = nameInput.value;
+      profileSubTitle.textContent = jobInput.value;
+    })
+    .catch((err) => console.err('Ошибка при редактировании профиля - ', err))
+    .finally(() => {
+      renderLoading(false, popupEdit, popupSaveDefaultText);
+      closePopup(popupEdit);
+      formEdit.reset();
+    });
 }
 
 popups.forEach((popup) => {
@@ -41,7 +52,7 @@ export function openPopup(popup) {
   document.addEventListener("keydown", handleEscKey);
 }
 
-export function closePopup(popup) { 
+export function closePopup(popup) {
   popup.classList.remove("popup_open");
   document.removeEventListener("keydown", handleEscKey);
 }

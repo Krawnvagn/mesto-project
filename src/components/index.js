@@ -1,6 +1,6 @@
 import "../pages/index.css";
 
-import { createCard, initialCards } from "./card.js";
+import { createCard } from "./card.js";
 import { closePopup, openPopup, submitFormHandlerEdit } from "./modal.js";
 import {
   cards,
@@ -26,12 +26,9 @@ import {
   blockSumbitButtonAfterSendForm,
   enableValidation,
 } from "./validate.js";
-import { loadApiProfile, loadApiCards, token, getUserInfo } from "./api.js";
+import { getUserInfo, getCards, config } from "./api.js";
 
-loadApiProfile();
-enableValidation();
-
-function renderLoading(isLoading, popup, defaultButtonText) {
+export function renderLoading(isLoading, popup, defaultButtonText) {
   const btnSumbitPopup = popup.querySelector(
     enableValidationKeys.submitButtonSelector
   );
@@ -44,7 +41,7 @@ function renderLoading(isLoading, popup, defaultButtonText) {
 
 profileAvatarShow.addEventListener("click", () => {
   const buttonSaveSubmit = formPhotoProfile.querySelector(".popup__save");
-  blockSumbitButtonAfterSendForm(buttonSaveSubmit);
+  blockSumbitButtonAfterSendForm(buttonSaveSubmit, enableValidationKeys);
   openPopup(profilePopup);
 });
 
@@ -53,12 +50,9 @@ function submitFormHandlerChangePhoto(evt) {
   const popupSaveDefaultText =
     profilePopup.querySelector(".popup__save").innerText;
   renderLoading(true, profilePopup);
-  fetch(`https://nomoreparties.co/v1/plus-cohort-9/users/me/avatar`, {
+  fetch(`${config.baseUrl}users/me/avatar`, {
     method: "PATCH",
-    headers: {
-      authorization: token,
-      "Content-Type": "application/json",
-    },
+    headers: config.headers,
     body: JSON.stringify({
       avatar: profileAvatar.src,
     }),
@@ -70,7 +64,7 @@ function submitFormHandlerChangePhoto(evt) {
       closePopup(profilePopup);
       formPhotoProfile.reset();
     })
-    .catch((err) => console.log(`Ошибка `, err))
+    .catch((err) => console.err(`Ошибка редактирования фотографии - `, err))
     .finally(() => {
       renderLoading(false, profilePopup, popupSaveDefaultText);
     });
@@ -84,7 +78,7 @@ profileEdit.addEventListener("click", () => {
 
 photoAdd.addEventListener("click", () => {
   const buttonSaveSubmit = formPhoto.querySelector(".popup__save");
-  blockSumbitButtonAfterSendForm(buttonSaveSubmit);
+  blockSumbitButtonAfterSendForm(buttonSaveSubmit, enableValidationKeys);
   openPopup(popupPhoto);
 });
 
@@ -96,12 +90,9 @@ function submitFormHandlerPhoto(evt) {
   const titleInputActually = titleInput.value;
   const linkInputActually = linkInput.value;
 
-  fetch("https://nomoreparties.co/v1/plus-cohort-9/cards", {
+  fetch(`${config.baseUrl}cards`, {
     method: "POST",
-    headers: {
-      authorization: token,
-      "Content-Type": "application/json",
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: titleInputActually,
       link: linkInputActually,
@@ -120,31 +111,29 @@ function submitFormHandlerPhoto(evt) {
     });
 }
 
-loadApiCards().then((res) => {
-  res.forEach((card) => {
-    cards.append(
-      createCard(
-        card.name,
-        card.link,
-        card.likes.length,
-        card._id,
-        card.owner._id
-      )
-    );
+Promise.all([getUserInfo(), getCards()])
+  .then(([userData, cardsData]) => {
+    profileAvatar.src = userData.avatar;
+    profileTitle.textContent = userData.name;
+    profileSubTitle.textContent = userData.about;
+    cardsData.forEach((card) => {
+      cards.append(
+        createCard(
+          card.name,
+          card.link,
+          card.likes.length,
+          card._id,
+          card.owner._id
+        )
+      );
+    });
+  })
+  .catch((err) => {
+    console.log("Ошибка с сервера - ", err);
   });
-});
-
-// Promise.all([getUserInfo(), getCards()])
-// // тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
-//   .then(([userData, cards]) => {
-//       // тут установка данных пользователя
-//       // и тут отрисовка карточек
-
-//   })
-//   .catch(err => {
-//     // тут ловим ошибку
-//   });
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);
 formPhotoProfile.addEventListener("submit", submitFormHandlerChangePhoto);
+
+enableValidation(enableValidationKeys);

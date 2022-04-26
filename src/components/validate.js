@@ -1,59 +1,57 @@
-import { enableValidationKeys } from "./constants.js";
-
-export function blockSumbitButtonAfterSendForm(buttonSubmit) {
-  buttonSubmit.classList.add(enableValidationKeys.inactiveButtonClass);
+export function blockSumbitButtonAfterSendForm(buttonSubmit, settings) {
+  buttonSubmit.classList.add(settings.inactiveButtonClass);
 }
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+export const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(enableValidationKeys.inputErrorClass);
+  inputElement.classList.add(settings.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(enableValidationKeys.errorClass);
+  errorElement.classList.add(settings.errorClass);
 };
 
-const hideInputError = (formElement, inputElement) => {
+export const hideInputError = (formElement, inputElement, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(enableValidationKeys.inputErrorClass);
+  inputElement.classList.remove(settings.inputErrorClass);
   errorElement.textContent = "";
-  errorElement.classList.remove(enableValidationKeys.errorClass);
+  errorElement.classList.remove(settings.errorClass);
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+export const checkInputValidity = (formElement, inputElement, settings) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   }
 };
 
-const setEventListeners = (formElement) => {
+export const setEventListeners = (formElement, settings) => {
   const inputList = Array.from(
-    formElement.querySelectorAll(enableValidationKeys.inputSelector)
+    formElement.querySelectorAll(settings.inputSelector)
   );
   const buttonElement = formElement.querySelector(
-    enableValidationKeys.submitButtonSelector
+    settings.submitButtonSelector
   );
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, settings);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+    inputElement.addEventListener("input", function () { //?change
+      checkInputValidity(formElement, inputElement, settings);
+      toggleButtonState(inputList, buttonElement, settings);
     });
   });
 };
 
-const hasInvalidInput = (inputList) => {
+export const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
+export const toggleButtonState = (inputList, buttonElement, settings) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(enableValidationKeys.inactiveButtonClass);
+    buttonElement.classList.add(settings.inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);
   } else {
-    buttonElement.classList.remove(enableValidationKeys.inactiveButtonClass);
+    buttonElement.classList.remove(settings.inactiveButtonClass);
     buttonElement.removeAttribute("disabled");
   }
 };
@@ -63,14 +61,14 @@ const toggleButtonState = (inputList, buttonElement) => {
 // начиная с enableValidation(settings), далее передается в
 // setEventListeners(formElement, settings) и так далее.
 // ОТВЕТ: У меня итак передается все через объект. Честно - не замечаю где тут глобальные селекторы применяются.
-export const enableValidation = () => {
+export const enableValidation = (settings) => {
   const formList = Array.from(
-    document.querySelectorAll(enableValidationKeys.formSelector)
+    document.querySelectorAll(settings.formSelector)
   );
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(formElement, settings);
   });
 };

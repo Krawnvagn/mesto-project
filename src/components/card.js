@@ -2,12 +2,10 @@ import {
   cardTemplate,
   photoCard,
   linkPhoto,
-  titlePhoto,
-  popupSure,
-  popupConfirmation,
+  titlePhoto
 } from "./constants.js";
-import { closePopup, openPopup } from "./modal.js";
-import { API_URL_CARDS, token, getUserInfo, config } from "./api.js";
+import { openPopup } from "./modal.js";
+import { config } from "./api.js";
 
 export const initialCards = [
   {
@@ -35,25 +33,6 @@ export const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-
-function handleCardDelete(cardLitter, cardId) {
-  openPopup(popupSure);
-  popupConfirmation.addEventListener("click", (e) => {
-    e.preventDefault();
-    const listItem = cardLitter.closest(".card");
-    closePopup(popupSure);
-    console.log("Карточка при удалении - ", cardId);
-    fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/${cardId}`, {
-      method: "DELETE",
-      headers: {
-        authorization: token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then(() => listItem.remove())
-      .finally(() => popupConfirmation.removeEventListener);
-  });
-}
 
 // Определять кол-во лайков нужно только с помощью длины массива лайков, пришедшего в блоке then в ответе от сервера
 // ОТВЕТ: Вы можете отследить параметр likesRef - определяется при отрисовке через длину массива, при загрузке карточек. Просто отследите создание этого параметра. Либо я не правильно понимаю вашего комментария.
@@ -91,11 +70,18 @@ function handleCardClick(name, link) {
   openPopup(photoCard);
 }
 
-export function createCard(name, link, likes, cardId, cardOwner) {
+const handleCardDelete = (cardDel, cardId) => {
+  const listItem = cardDel.closest(".card");
+  fetch(`${config.baseUrl}cards/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers
+  })
+    .then(() => listItem.remove())
+    .catch((err) => console.err("Ошибка при удалении картчоки - ", err))
+}
+
+export function createCard(name, link, likes, cardId) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-
-  cardElement.cardId = cardId;
-
   const cardTitle = cardElement.querySelector(".card__title");
   const cardPhoto = cardElement.querySelector(".card__photo");
   const cardLike = cardElement.querySelector(".card__like");
@@ -105,13 +91,8 @@ export function createCard(name, link, likes, cardId, cardOwner) {
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  if (cardOwner !== getUserInfo._id) {
-    cardDel.remove();
-  } else {
-    cardDel.addEventListener("click", () => {
-      handleCardDelete(cardDel, cardElement.cardId);
-    });
-  }
+  // Хз как реализовать появление корзинки только у создателя картинки а не у всех
+  cardDel.addEventListener("click", () => handleCardDelete(cardDel, cardId));
   cardLike.addEventListener("click", (evt) =>
     handleLikeCard(evt, cardCountLikes, cardElement.cardId)
   );
