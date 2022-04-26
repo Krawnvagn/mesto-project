@@ -67,11 +67,13 @@ function submitFormHandlerChangePhoto(evt) {
       avatar: profileAvatar.src,
     }),
   })
+    .then(() => {
+      closePopup(profilePopup);
+      formPhotoProfile.reset();
+    })
     .catch((err) => console.log(`Ошибка `, err))
     .finally(() => {
       renderLoading(false, profilePopup, popupSaveDefaultText);
-      closePopup(profilePopup);
-      formPhotoProfile.reset();
     });
 }
 
