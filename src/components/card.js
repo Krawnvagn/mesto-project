@@ -42,25 +42,27 @@ function handleCardDelete(cardLitter, cardId) {
     e.preventDefault();
     const listItem = cardLitter.closest(".card");
     closePopup(popupSure);
-    console.log("CARDA", cardId);
+    console.log("Карточка при удалении - ", cardId);
     fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: token,
         "Content-Type": "application/json",
       },
-    }).then(() => listItem.remove());
+    })
+      .then(() => listItem.remove())
+      .finally(() => popupConfirmation.removeEventListener);
   });
 }
 
-    // Определять кол-во лайков нужно только с помощью длины массива лайков, пришедшего в блоке then в ответе от сервера
-    // ОТВЕТ: Вы можете отследить параметр likesRef - определяется при отрисовке через длину массива, при загрузке карточек. Просто отследите создание этого параметра. Либо я не правильно понимаю вашего комментария.     
+// Определять кол-во лайков нужно только с помощью длины массива лайков, пришедшего в блоке then в ответе от сервера
+// ОТВЕТ: Вы можете отследить параметр likesRef - определяется при отрисовке через длину массива, при загрузке карточек. Просто отследите создание этого параметра. Либо я не правильно понимаю вашего комментария.
 function handleLikeCard(evt, likesRef, cardId) {
   let likesCount = parseInt(likesRef.innerText);
   if (evt.target.classList.contains("card__like_active")) {
     fetch(`${config.baseUrl}cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: config.headers
+      headers: config.headers,
     })
       .then((res) => {
         console.log("Сервер вернул ответ после удаления лайка", res);
@@ -71,7 +73,7 @@ function handleLikeCard(evt, likesRef, cardId) {
   } else {
     fetch(`${config.baseUrl}cards/likes/${cardId}`, {
       method: "PUT",
-      headers: config.headers
+      headers: config.headers,
     })
       .then((res) => {
         console.log("Сервер вернул ответ после постановки лайка:", res);

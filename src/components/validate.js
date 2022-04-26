@@ -1,6 +1,6 @@
 import { enableValidationKeys } from "./constants.js";
 
-export function blockSumbitButtonAfterSendForm (buttonSubmit) {
+export function blockSumbitButtonAfterSendForm(buttonSubmit) {
   buttonSubmit.classList.add(enableValidationKeys.inactiveButtonClass);
 }
 
@@ -16,7 +16,7 @@ const hideInputError = (formElement, inputElement) => {
   inputElement.classList.remove(enableValidationKeys.inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(enableValidationKeys.errorClass);
-};  
+};
 
 const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
@@ -51,10 +51,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(enableValidationKeys.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
+    buttonElement.setAttribute("disabled", true);
   } else {
     buttonElement.classList.remove(enableValidationKeys.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
+    buttonElement.removeAttribute("disabled");
   }
 };
 

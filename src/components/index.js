@@ -92,7 +92,7 @@ function submitFormHandlerPhoto(evt) {
   evt.preventDefault();
   const popupSaveDefaultText =
     popupPhoto.querySelector(".popup__save").innerText;
-  renderLoading(true, popupPhoto, popupSaveDefaultText);
+  renderLoading(true, popupPhoto);
   const titleInputActually = titleInput.value;
   const linkInputActually = linkInput.value;
 
@@ -134,15 +134,16 @@ loadApiCards().then((res) => {
   });
 });
 
-Promise.all([getUserInfo(), getCards()])
-// тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
-  .then(([userData, cards]) => {
-      // тут установка данных пользователя
-      // и тут отрисовка карточек
-  })
-  .catch(err => {
-    // тут ловим ошибку
-  });
+// Promise.all([getUserInfo(), getCards()])
+// // тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
+//   .then(([userData, cards]) => {
+//       // тут установка данных пользователя
+//       // и тут отрисовка карточек
+
+//   })
+//   .catch(err => {
+//     // тут ловим ошибку
+//   });
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);
