@@ -14,7 +14,7 @@ const responseCheck = (res) => {
   }
 };
 
-const config = {
+export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-9/',
   headers: {
     authorization: 'cfb5467c-bf03-4f53-98d0-54d36791533e',

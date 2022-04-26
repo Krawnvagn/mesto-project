@@ -7,7 +7,7 @@ import {
   popupConfirmation,
 } from "./constants.js";
 import { closePopup, openPopup } from "./modal.js";
-import { API_URL_CARDS, token, getUserInfo } from "./api.js";
+import { API_URL_CARDS, token, getUserInfo, config } from "./api.js";
 
 export const initialCards = [
   {
@@ -59,12 +59,9 @@ function handleLikeCard(evt, likesRef, cardId) {
   let likesCount = parseInt(likesRef.innerText);
   if (!evt.target.classList.contains("card__like_active")) {
     likesRef.innerText = likesCount -= 1;
-    fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/likes/${cardId}`, {
+    fetch(`${config.baseUrl}cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: token,
-        "Content-Type": "application/json",
-      },
+      headers: config.headers
     });
   } else {
     likesRef.innerText = likesCount += 1;
