@@ -26,7 +26,7 @@ import {
   blockSumbitButtonAfterSendForm,
   enableValidation,
 } from "./validate.js";
-import { loadApiProfile, loadApiCards, token } from "./api.js";
+import { loadApiProfile, loadApiCards, token, getUserInfo } from "./api.js";
 
 loadApiProfile();
 enableValidation();
@@ -53,10 +53,6 @@ function submitFormHandlerChangePhoto(evt) {
   const popupSaveDefaultText =
     profilePopup.querySelector(".popup__save").innerText;
   renderLoading(true, profilePopup);
-  profileAvatar.src = profilePopup.querySelector(
-    ".popup__input_type_link"
-  ).value;
-
   fetch(`https://nomoreparties.co/v1/plus-cohort-9/users/me/avatar`, {
     method: "PATCH",
     headers: {
@@ -68,6 +64,9 @@ function submitFormHandlerChangePhoto(evt) {
     }),
   })
     .then(() => {
+      profileAvatar.src = profilePopup.querySelector(
+        ".popup__input_type_link"
+      ).value;
       closePopup(profilePopup);
       formPhotoProfile.reset();
     })
@@ -134,6 +133,16 @@ loadApiCards().then((res) => {
     );
   });
 });
+
+Promise.all([getUserInfo(), getCards()])
+// тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
+  .then(([userData, cards]) => {
+      // тут установка данных пользователя
+      // и тут отрисовка карточек
+  })
+  .catch(err => {
+    // тут ловим ошибку
+  });
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);

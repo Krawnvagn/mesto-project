@@ -49,29 +49,36 @@ function handleCardDelete(cardLitter, cardId) {
         authorization: token,
         "Content-Type": "application/json",
       },
-    })
-    .then(() => listItem.remove())
-  })
+    }).then(() => listItem.remove());
+  });
 }
 
+    // Определять кол-во лайков нужно только с помощью длины массива лайков, пришедшего в блоке then в ответе от сервера
+    // ОТВЕТ: Вы можете отследить параметр likesRef - определяется при отрисовке через длину массива, при загрузке карточек. Просто отследите создание этого параметра. Либо я не правильно понимаю вашего комментария.     
 function handleLikeCard(evt, likesRef, cardId) {
-  evt.target.classList.toggle("card__like_active");
   let likesCount = parseInt(likesRef.innerText);
-  if (!evt.target.classList.contains("card__like_active")) {
-    likesRef.innerText = likesCount -= 1;
+  if (evt.target.classList.contains("card__like_active")) {
     fetch(`${config.baseUrl}cards/likes/${cardId}`, {
       method: "DELETE",
       headers: config.headers
-    });
+    })
+      .then((res) => {
+        console.log("Сервер вернул ответ после удаления лайка", res);
+        likesRef.textContent = likesCount -= 1;
+        evt.target.classList.remove("card__like_active");
+      })
+      .catch((err) => console.log(err));
   } else {
-    likesRef.innerText = likesCount += 1;
-    fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/likes/${cardId}`, {
+    fetch(`${config.baseUrl}cards/likes/${cardId}`, {
       method: "PUT",
-      headers: {
-        authorization: token,
-        "Content-Type": "application/json",
-      },
-    });
+      headers: config.headers
+    })
+      .then((res) => {
+        console.log("Сервер вернул ответ после постановки лайка:", res);
+        likesRef.textContent = likesCount += 1;
+        evt.target.classList.add("card__like_active");
+      })
+      .catch((err) => console.log(err));
   }
 }
 
