@@ -5,7 +5,7 @@ import {
   titlePhoto,
   popupSure,
   popupConfirmation,
-} from "./utils.js";
+} from "./constants.js";
 import { closePopup, openPopup } from "./modal.js";
 import { API_URL_CARDS, token, apiTokenProfile } from "./api.js";
 
@@ -36,7 +36,7 @@ export const initialCards = [
   },
 ];
 
-function cardDeleteFunction(cardLitter, cardId) {
+function handleCardDelete(cardLitter, cardId) {
   openPopup(popupSure);
   popupConfirmation.addEventListener("click", (e) => {
     e.preventDefault();
@@ -54,11 +54,9 @@ function cardDeleteFunction(cardLitter, cardId) {
   });
 }
 
-function cardLikeFunction(evt, likesRef, cardId) {
+function handleLikeCard(evt, likesRef, cardId) {
   evt.target.classList.toggle("card__like_active");
-  let likesCount = parseInt(
-    likesRef.innerText
-  ); /* parseInt - вытаскиваем число из строки */
+  let likesCount = parseInt(likesRef.innerText);
   if (!evt.target.classList.contains("card__like_active")) {
     likesRef.innerText = likesCount -= 1;
     fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/likes/${cardId}`, {
@@ -80,14 +78,11 @@ function cardLikeFunction(evt, likesRef, cardId) {
   }
 }
 
-function cardPhotoFunction(name, link) {
+function handleCardClick(name, link) {
   linkPhoto.src = link;
   linkPhoto.alt = name;
   titlePhoto.innerText = name;
   openPopup(photoCard);
-  // На медленных устройствах при твоём коде будут моргания - сначала
-  //  покажется попап со старыми данными, потом появятся новые. Поэтому
-  //   лучше сначала заменить все данные, а потом показать попап
 }
 
 export function createCard(name, link, likes, cardId, cardOwner) {
@@ -108,12 +103,12 @@ export function createCard(name, link, likes, cardId, cardOwner) {
     cardDel.remove();
   } else {
     cardDel.addEventListener("click", () => {
-      cardDeleteFunction(cardDel, cardElement.cardId);
+      handleCardDelete(cardDel, cardElement.cardId);
     });
-  } 
+  }
   cardLike.addEventListener("click", (evt) =>
-    cardLikeFunction(evt, cardCountLikes, cardElement.cardId)
+    handleLikeCard(evt, cardCountLikes, cardElement.cardId)
   );
-  cardPhoto.addEventListener("click", () => cardPhotoFunction(name, link));
+  cardPhoto.addEventListener("click", () => handleCardClick(name, link));
   return cardElement;
 }

@@ -21,7 +21,7 @@ import {
   profileAvatar,
   profileAvatarShow,
   formPhotoProfile,
-} from "./utils.js";
+} from "./constants.js";
 import {
   blockSumbitButtonAfterSendForm,
   enableValidation,
@@ -115,10 +115,6 @@ function submitFormHandlerPhoto(evt) {
       formPhoto.reset();
     });
 }
-
-// initialCards.forEach((card) => {
-//   cards.prepend(createCard(card.name, card.link));
-// });
 
 loadApiCards().then((res) => {
   res.forEach((card) => {

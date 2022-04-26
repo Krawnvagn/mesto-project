@@ -1,4 +1,4 @@
-import { profileAvatar, profileSubTitle, profileTitle } from "./utils.js";
+import { profileAvatar, profileSubTitle, profileTitle } from "./constants.js";
 
 export const token = "cfb5467c-bf03-4f53-98d0-54d36791533e";
 const API_COHORT = "plus-cohort-9";
@@ -8,9 +8,9 @@ const API_URL_CARDS = API_URL + "/cards";
 
 const responseCheck = (res) => {
   if (res.ok) {
-    return res.json(); // then
+    return res.json();
   } else {
-    return Promise.reject(`Ошибка: code ${res.status}`); // catch
+    return Promise.reject(`Ошибка: code ${res.status}`);
   }
 };
 
@@ -57,51 +57,3 @@ export const loadApiProfile = () => {
       console.error('Ошибка - ', err);
     });
 };
-
-
-
-
-// function search (entity, entityId) {
-//   return fetch(`https://swapi.nomoreparties.co/${entity}/${entityId}`)
-// }
-
-// function renderResult (text) {
-//   result.textContent = text;
-//   error.textContent = ''
-// }
-
-// function renderError (err) {
-//   result.textContent = '';
-//   error.textContent = err;
-// }
-
-// function renderLoading (isLoading) {
-//   if (isLoading) {
-//     spinner.classList.add('spinner_visible');
-//     content.classList.add('content_hidden');
-//   } else {
-//     spinner.classList.remove('spinner_visible');
-//     content.classList.remove('content_hidden');
-//   }
-// }
-
-// form.addEventListener('submit', function submit(e) {
-//   e.preventDefault();
-//   renderLoading(true)
-//   search(form.elements.entity.value, form.elements.entityId.value)
-//     .then((res) => {
-//       if (res.ok) { 
-//         return res.json();
-//         } else {
-//           return Promise.reject(res.status);
-//         }
-//     })
-//     .then((res) => renderResult(res.name))
-//     .catch((err) => renderError(res.err))
-//     .finally(() => renderLoading(false))
-// });
-
-// Извиняюсь что адекватно не доделал, морально устал. Надеюсь не слишком много работы возложу на ревьюера.
-// По пунктам "Работа отклоняется от проверки" - работа проходит. 
-
-// Еще раз извиняюсь. Прошу понять - морально устал и хочу получить фидбек по работе первой итерацией.

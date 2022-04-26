@@ -1,8 +1,8 @@
-import { enableValidationKeys } from "./utils.js";
+import { enableValidationKeys } from "./constants.js";
 
 export function blockSumbitButtonAfterSendForm (buttonSubmit) {
   buttonSubmit.classList.add(enableValidationKeys.inactiveButtonClass);
-} /* Ревьюер - вопрос к вам: Где вызвать эту функцию не совсем понимаю чтобы было правильно */
+}
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -64,12 +64,6 @@ export const enableValidation = () => {
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-
     setEventListeners(formElement);
-
-    // const fieldsetList = Array.from(formElement.querySelectorAll('.form__set'));
-    // fieldsetList.forEach((fieldSet) => {
-    //   setEventListeners(fieldSet);
-    // });
   });
 };

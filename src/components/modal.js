@@ -5,7 +5,7 @@ import {
   profileSubTitle,
   jobInput,
   popupEdit,
-} from "./utils.js";
+} from "./constants.js";
 
 export function submitFormHandlerEdit(evt) {
   evt.preventDefault();
@@ -37,23 +37,16 @@ popups.forEach((popup) => {
 });
 
 export function openPopup(popup) {
-  // const buttonSaveSubmit = popup.querySelector('.popup__save'); /* СРАБОТАЛО! */
-  // blockSumbitButtonAfterSendForm(buttonSaveSubmit);
-  // document.querySelector('popup__save').classList.add('.popup__save_inactive'); - не работает
   popup.classList.add("popup_open");
-  document.addEventListener("keydown", keyHandler);
-  // if (popup === 'popup__edit' || popup === 'popup__photo') {
-  //   blockSumbitButtonAfterSendForm(enableValidationKeys.submitButtonSelector); - не работает
-  // }
+  document.addEventListener("keydown", handleEscKey);
 }
 
 export function closePopup(popup) { 
   popup.classList.remove("popup_open");
-  document.removeEventListener("keydown", keyHandler);
-  // document.querySelector('popup__save').classList.add('.popup__save_inactive'); - не работает
+  document.removeEventListener("keydown", handleEscKey);
 }
 
-function keyHandler(evt) {
+function handleEscKey(evt) {
   if (evt.key === "Escape") {
     const currentlyOpenPopup = document.querySelector(".popup_open");
     closePopup(currentlyOpenPopup);
