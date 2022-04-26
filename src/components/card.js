@@ -41,7 +41,6 @@ function handleCardDelete(cardLitter, cardId) {
   popupConfirmation.addEventListener("click", (e) => {
     e.preventDefault();
     const listItem = cardLitter.closest(".card");
-    listItem.remove();
     closePopup(popupSure);
     console.log("CARDA", cardId);
     fetch(`https://nomoreparties.co/v1/plus-cohort-9/cards/${cardId}`, {
@@ -50,8 +49,9 @@ function handleCardDelete(cardLitter, cardId) {
         authorization: token,
         "Content-Type": "application/json",
       },
-    });
-  });
+    })
+    .then(() => listItem.remove())
+  })
 }
 
 function handleLikeCard(evt, likesRef, cardId) {
