@@ -56,11 +56,6 @@ export const toggleButtonState = (inputList, buttonElement, settings) => {
   }
 };
 
-// Все строки-селекторы для валидации нужно брать только из объекта валидации,
-// который передается в вызов каждой функции,
-// начиная с enableValidation(settings), далее передается в
-// setEventListeners(formElement, settings) и так далее.
-// ОТВЕТ: У меня итак передается все через объект. Честно - не замечаю где тут глобальные селекторы применяются.
 export const enableValidation = (settings) => {
   const formList = Array.from(
     document.querySelectorAll(settings.formSelector)

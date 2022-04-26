@@ -1,9 +1,4 @@
-import {
-  cardTemplate,
-  photoCard,
-  linkPhoto,
-  titlePhoto
-} from "./constants.js";
+import { cardTemplate, photoCard, linkPhoto, titlePhoto } from "./constants.js";
 import { openPopup } from "./modal.js";
 import { config } from "./api.js";
 
@@ -43,9 +38,10 @@ function handleLikeCard(evt, likesRef, cardId) {
       method: "DELETE",
       headers: config.headers,
     })
+      .then((json) => json.json())
       .then((res) => {
-        console.log("Сервер вернул ответ после удаления лайка", res);
-        likesRef.textContent = likesCount -= 1;
+        likesCount = res.likes.length;
+        likesRef.textContent = likesCount--;
         evt.target.classList.remove("card__like_active");
       })
       .catch((err) => console.log(err));
@@ -54,9 +50,10 @@ function handleLikeCard(evt, likesRef, cardId) {
       method: "PUT",
       headers: config.headers,
     })
+      .then((json) => json.json())
       .then((res) => {
-        console.log("Сервер вернул ответ после постановки лайка:", res);
-        likesRef.textContent = likesCount += 1;
+        likesCount = res.likes.length;
+        likesRef.textContent = likesCount++;
         evt.target.classList.add("card__like_active");
       })
       .catch((err) => console.log(err));
@@ -74,27 +71,38 @@ const handleCardDelete = (cardDel, cardId) => {
   const listItem = cardDel.closest(".card");
   fetch(`${config.baseUrl}cards/${cardId}`, {
     method: "DELETE",
-    headers: config.headers
+    headers: config.headers,
   })
     .then(() => listItem.remove())
-    .catch((err) => console.err("Ошибка при удалении картчоки - ", err))
-}
+    .catch((err) => console.err("Ошибка при удалении картчоки - ", err));
+};
 
-export function createCard(name, link, likes, cardId) {
+export function createCard(name, link, likes, cardId, cardOwner) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardTitle = cardElement.querySelector(".card__title");
   const cardPhoto = cardElement.querySelector(".card__photo");
   const cardLike = cardElement.querySelector(".card__like");
-  const cardDel = cardElement.querySelector(".card__del");
+  let cardDel = cardElement.querySelector(".card__del");
   const cardCountLikes = cardElement.querySelector(".card__like_count");
+
+  // Проблема судя по всему в моей структуре кода, ибо не получается в foreach бахнуть картинку удаления только в -своих- карточках
+  // Аналогичная проблема и с добавлением класса в -своих- карточках, не могу получить информацию из профиля. Нужна помощь
+  // const isOwner = await fetch(`${config.baseUrl}users/me`, {
+  //   headers: config.headers,
+  // })
+  //   .then((json) => json.json())
+  //   .then((res) => res._id === cardOwner);
+  // if (!isOwner) {
+  //   cardDel.remove();
+  // }
+
   cardCountLikes.innerText = likes;
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  // Хз как реализовать появление корзинки только у создателя картинки а не у всех
   cardDel.addEventListener("click", () => handleCardDelete(cardDel, cardId));
   cardLike.addEventListener("click", (evt) =>
-    handleLikeCard(evt, cardCountLikes, cardElement.cardId)
+    handleLikeCard(evt, cardCountLikes, cardId)
   );
   cardPhoto.addEventListener("click", () => handleCardClick(name, link));
   return cardElement;
