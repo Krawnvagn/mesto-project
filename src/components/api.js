@@ -14,7 +14,22 @@ const responseCheck = (res) => {
   }
 };
 
-export const apiTokenProfile = () => {
+const config = {
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-9/',
+  headers: {
+    authorization: 'cfb5467c-bf03-4f53-98d0-54d36791533e',
+    'Content-Type': 'application/json'
+  }
+}
+
+export const getInitialCards = () => {
+    return fetch(`${config.baseUrl}`, {
+      headers: config.headers
+    })
+    .then (res => responseCheck(res))
+}
+
+export const getUserInfo = () => {
   return fetch(API_URL_USER, {
     headers: {
       authorization: token,
@@ -25,10 +40,9 @@ export const apiTokenProfile = () => {
       console.log('Результат АПИ Профиля - ', res);
       return res;
     })
-    .catch(err => console.err(err))
 };
 
-const apiTokenCards = () => {
+const getCards = () => {
   return fetch(API_URL_CARDS, {
     headers: {
       authorization: token,
@@ -39,15 +53,14 @@ const apiTokenCards = () => {
     console.log('Результат АПИ карточек - ', res);
     return res;
   })
-  .catch(err => console.err(err))
 }
 
 export const loadApiCards = () => {
-  return apiTokenCards();
+  return getCards();
 }
 
 export const loadApiProfile = () => {
-  apiTokenProfile()
+  getUserInfo()
     .then((res) => {
       profileAvatar.src = res.avatar;
       profileTitle.textContent = res.name;

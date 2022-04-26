@@ -7,7 +7,7 @@ import {
   popupConfirmation,
 } from "./constants.js";
 import { closePopup, openPopup } from "./modal.js";
-import { API_URL_CARDS, token, apiTokenProfile } from "./api.js";
+import { API_URL_CARDS, token, getUserInfo } from "./api.js";
 
 export const initialCards = [
   {
@@ -99,7 +99,7 @@ export function createCard(name, link, likes, cardId, cardOwner) {
   cardTitle.innerText = name;
   cardPhoto.alt = name;
   cardPhoto.src = link;
-  if (cardOwner !== apiTokenProfile._id) {
+  if (cardOwner !== getUserInfo._id) {
     cardDel.remove();
   } else {
     cardDel.addEventListener("click", () => {
