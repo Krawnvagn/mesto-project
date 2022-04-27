@@ -112,7 +112,7 @@ Promise.all([getUserInfo(), getCards()])
         createCard(
           card.name,
           card.link,
-          card.likes.length,
+          card.likes,
           card._id,
           card.owner._id,
           user
