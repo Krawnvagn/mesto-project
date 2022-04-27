@@ -15,15 +15,8 @@ export function submitFormHandlerEdit(evt) {
   const popupSaveDefaultText =
     popupEdit.querySelector(".popup__save").innerText;
   renderLoading(true, popupEdit);
-  fetch(`${config.baseUrl}users/me`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify({
-      name: nameInput.value,
-      about: jobInput.value,
-    }),
-  })
-    .then((json) => json.json())
+  patchUserChange(nameInput.value, jobInput.value)
+    .then(responseCheck)
     .then(() => {
       profileTitle.textContent = nameInput.value;
       profileSubTitle.textContent = jobInput.value;

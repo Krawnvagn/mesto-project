@@ -2,7 +2,7 @@ import "../pages/index.css";
 
 import { createCard } from "./card.js";
 import { submitFormHandlerEdit } from "./modal.js";
-import { closePopup, openPopup, renderLoading } from "./utils.js";
+import { closePopup, openPopup, renderLoading, hiddenValidation } from "./utils.js";
 import {
   cards,
   formEdit,
@@ -27,7 +27,14 @@ import {
   blockSumbitButtonAfterSendForm,
   enableValidation,
 } from "./validate.js";
-import { getUserInfo, getCards, config } from "./api.js";
+import {
+  getUserInfo,
+  getCards,
+  config,
+  patchUserAvatar,
+  postCard,
+  responseCheck,
+} from "./api.js";
 
 profileAvatarShow.addEventListener("click", () => {
   const buttonSaveSubmit = formPhotoProfile.querySelector(".popup__save");
@@ -40,13 +47,8 @@ function submitFormHandlerChangePhoto(evt) {
   const popupSaveDefaultText =
     profilePopup.querySelector(".popup__save").innerText;
   renderLoading(true, profilePopup);
-  fetch(`${config.baseUrl}users/me/avatar`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify({
-      avatar: profileAvatar.src,
-    }),
-  })
+  patchUserAvatar(profileAvatar.src)
+    .then(responseCheck)
     .then(() => {
       profileAvatar.src = profilePopup.querySelector(
         ".popup__input_type_link"
@@ -61,14 +63,18 @@ function submitFormHandlerChangePhoto(evt) {
 }
 
 profileEdit.addEventListener("click", () => {
-  openPopup(popupEdit);
+  const buttonSaveSubmit = formEdit.querySelector(".popup__save");
+  blockSumbitButtonAfterSendForm(buttonSaveSubmit, enableValidationKeys);
   nameInput.value = profileTitle.innerText;
   jobInput.value = profileSubTitle.innerText;
+  hiddenValidation(popupEdit);
+  openPopup(popupEdit);
 });
 
 photoAdd.addEventListener("click", () => {
   const buttonSaveSubmit = formPhoto.querySelector(".popup__save");
   blockSumbitButtonAfterSendForm(buttonSaveSubmit, enableValidationKeys);
+  hiddenValidation(popupPhoto);
   openPopup(popupPhoto);
 });
 
@@ -79,16 +85,8 @@ function submitFormHandlerPhoto(evt) {
   renderLoading(true, popupPhoto);
   const titleInputActually = titleInput.value;
   const linkInputActually = linkInput.value;
-
-  fetch(`${config.baseUrl}cards`, {
-    method: "POST",
-    headers: config.headers,
-    body: JSON.stringify({
-      name: titleInputActually,
-      link: linkInputActually,
-    }),
-  })
-    .then((json) => json.json())
+  postCard(titleInputActually, linkInputActually)
+    .then(responseCheck)
     .then((result) => {
       cards.prepend(
         createCard(titleInputActually, linkInputActually, 0, result._id)
@@ -101,8 +99,11 @@ function submitFormHandlerPhoto(evt) {
     });
 }
 
+let user;
+
 Promise.all([getUserInfo(), getCards()])
   .then(([userData, cardsData]) => {
+    user = userData._id
     profileAvatar.src = userData.avatar;
     profileTitle.textContent = userData.name;
     profileSubTitle.textContent = userData.about;
@@ -113,7 +114,8 @@ Promise.all([getUserInfo(), getCards()])
           card.link,
           card.likes.length,
           card._id,
-          card.owner._id
+          card.owner._id,
+          user
         )
       );
     });

@@ -34,7 +34,7 @@ export const setEventListeners = (formElement, settings) => {
   );
   toggleButtonState(inputList, buttonElement, settings);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () { //?change
+    inputElement.addEventListener("change", function () { //?change?input
       checkInputValidity(formElement, inputElement, settings);
       toggleButtonState(inputList, buttonElement, settings);
     });

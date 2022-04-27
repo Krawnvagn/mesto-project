@@ -37,18 +37,17 @@
 /* Корректировка отступа кнопки Сохранить */
 @import url(../blocks/popup/__save-correct/popup__save-correct.css);
 
-/* Кнопка подтверждения "Вы уверены?" */
-@import url(../blocks/popup/__confirmation/popup__confirmation.css);
-
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_open/popup_open.css);
 @import url(../blocks/popup/__container-photo/popup__container-photo.css);
 @import url(../blocks/popup/__photo/popup__photo.css);
 @import url(../blocks/popup/__title-photo/popup__title-photo.css);
+
 /* Добавить второй "_" перед _input-error */
 @import url(../blocks/popup/__input-error/popup__input-error.css);
 @import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
+@import url(../blocks/popup/__input/_type/popup__input_error_type.css);
 
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__save/_inactive/popup__save_inactive.css);
