@@ -1,5 +1,5 @@
 import { cardTemplate, photoCard, linkPhoto, titlePhoto } from "./constants.js";
-import { openPopup } from "./modal.js";
+import { openPopup } from "./utils.js";
 import { config } from "./api.js";
 
 export const initialCards = [
@@ -29,10 +29,7 @@ export const initialCards = [
   },
 ];
 
-// Определять кол-во лайков нужно только с помощью длины массива лайков, пришедшего в блоке then в ответе от сервера
-// ОТВЕТ: Вы можете отследить параметр likesRef - определяется при отрисовке через длину массива, при загрузке карточек. Просто отследите создание этого параметра. Либо я не правильно понимаю вашего комментария.
 function handleLikeCard(evt, likesRef, cardId) {
-  let likesCount = parseInt(likesRef.innerText);
   if (evt.target.classList.contains("card__like_active")) {
     fetch(`${config.baseUrl}cards/likes/${cardId}`, {
       method: "DELETE",
@@ -40,8 +37,7 @@ function handleLikeCard(evt, likesRef, cardId) {
     })
       .then((json) => json.json())
       .then((res) => {
-        likesCount = res.likes.length;
-        likesRef.textContent = likesCount--;
+        likesRef.textContent = res.likes.length;
         evt.target.classList.remove("card__like_active");
       })
       .catch((err) => console.log(err));
@@ -52,8 +48,7 @@ function handleLikeCard(evt, likesRef, cardId) {
     })
       .then((json) => json.json())
       .then((res) => {
-        likesCount = res.likes.length;
-        likesRef.textContent = likesCount++;
+        likesRef.textContent = res.likes.length;
         evt.target.classList.add("card__like_active");
       })
       .catch((err) => console.log(err));

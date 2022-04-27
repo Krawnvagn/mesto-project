@@ -1,7 +1,8 @@
 import "../pages/index.css";
 
 import { createCard } from "./card.js";
-import { closePopup, openPopup, submitFormHandlerEdit } from "./modal.js";
+import { submitFormHandlerEdit } from "./modal.js";
+import { closePopup, openPopup, renderLoading } from "./utils.js";
 import {
   cards,
   formEdit,
@@ -27,17 +28,6 @@ import {
   enableValidation,
 } from "./validate.js";
 import { getUserInfo, getCards, config } from "./api.js";
-
-export function renderLoading(isLoading, popup, defaultButtonText) {
-  const btnSumbitPopup = popup.querySelector(
-    enableValidationKeys.submitButtonSelector
-  );
-  if (isLoading) {
-    btnSumbitPopup.textContent = "Сохранение...";
-  } else if (defaultButtonText) {
-    btnSumbitPopup.textContent = defaultButtonText;
-  }
-}
 
 profileAvatarShow.addEventListener("click", () => {
   const buttonSaveSubmit = formPhotoProfile.querySelector(".popup__save");
@@ -103,11 +93,11 @@ function submitFormHandlerPhoto(evt) {
       cards.prepend(
         createCard(titleInputActually, linkInputActually, 0, result._id)
       );
+      closePopup(popupPhoto);
+      formPhoto.reset();
     })
     .finally(() => {
       renderLoading(false, popupPhoto, popupSaveDefaultText);
-      closePopup(popupPhoto);
-      formPhoto.reset();
     });
 }
 

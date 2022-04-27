@@ -5,7 +5,7 @@ const responseCheck = (res) => {
     return Promise.reject(`Ошибка: code ${res.status}`);
   }
 };
-
+// 1
 export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-9/',
   headers: {
@@ -13,14 +13,7 @@ export const config = {
     'Content-Type': 'application/json'
   }
 }
-
-export const getInitialCards = () => {
-    return fetch(`${config.baseUrl}`, {
-      headers: config.headers
-    })
-    .then (res => responseCheck(res))
-}
-
+// 2
 export const getUserInfo = () => {
   return fetch(`${config.baseUrl}users/me`, {
     headers: config.headers
@@ -31,7 +24,7 @@ export const getUserInfo = () => {
       return res;
     })
 };
-
+// 3
 export const getCards = () => {
   return fetch(`${config.baseUrl}cards`, {
     headers: config.headers
@@ -42,3 +35,7 @@ export const getCards = () => {
     return res;
   })
 }
+// 4
+// 5
+// 6
+// -7

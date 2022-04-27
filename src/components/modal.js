@@ -6,9 +6,9 @@ import {
   profileSubTitle,
   jobInput,
   popupEdit,
-  formEdit
+  formEdit,
 } from "./constants.js";
-import { renderLoading } from "./index.js";
+import { closePopup, renderLoading } from "./utils.js";
 
 export function submitFormHandlerEdit(evt) {
   evt.preventDefault();
@@ -27,12 +27,12 @@ export function submitFormHandlerEdit(evt) {
     .then(() => {
       profileTitle.textContent = nameInput.value;
       profileSubTitle.textContent = jobInput.value;
-    })
-    .catch((err) => console.err('Ошибка при редактировании профиля - ', err))
-    .finally(() => {
-      renderLoading(false, popupEdit, popupSaveDefaultText);
       closePopup(popupEdit);
       formEdit.reset();
+    })
+    .catch((err) => console.err("Ошибка при редактировании профиля - ", err))
+    .finally(() => {
+      renderLoading(false, popupEdit, popupSaveDefaultText);
     });
 }
 
@@ -47,17 +47,7 @@ popups.forEach((popup) => {
   });
 });
 
-export function openPopup(popup) {
-  popup.classList.add("popup_open");
-  document.addEventListener("keydown", handleEscKey);
-}
-
-export function closePopup(popup) {
-  popup.classList.remove("popup_open");
-  document.removeEventListener("keydown", handleEscKey);
-}
-
-function handleEscKey(evt) {
+export function handleEscKey(evt) {
   if (evt.key === "Escape") {
     const currentlyOpenPopup = document.querySelector(".popup_open");
     closePopup(currentlyOpenPopup);

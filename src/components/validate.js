@@ -1,5 +1,6 @@
 export function blockSumbitButtonAfterSendForm(buttonSubmit, settings) {
   buttonSubmit.classList.add(settings.inactiveButtonClass);
+  buttonSubmit.setAttribute("disabled", true);
 }
 
 export const showInputError = (formElement, inputElement, errorMessage, settings) => {
