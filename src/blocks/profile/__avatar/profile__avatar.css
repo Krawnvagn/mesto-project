@@ -22,12 +22,13 @@
   cursor: pointer;
 }
 
-@media (min-width: 320px) and (max-width: 1279px) {
-  .profile__avatar {
-    margin-bottom: 24px;
-  }
-}
-
 .profile__avatar:hover + .profile__avatar-hover {
   background: rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 320px) and (max-width: 1279px) {
+  .profile__avatar,
+  .profile__avatar-hover {
+    margin-bottom: 24px;
+  }
 }
