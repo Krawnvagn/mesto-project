@@ -47,16 +47,16 @@ function submitFormHandlerChangePhoto(evt) {
   const popupSaveDefaultText =
     profilePopup.querySelector(".popup__save").innerText;
   renderLoading(true, profilePopup);
-  patchUserAvatar(profileAvatar.src)
-    .then(responseCheck)
+  const linkNewPhoto = profilePopup.querySelector(
+    ".popup__input_type_link"
+  ).value;
+  patchUserAvatar(linkNewPhoto)
     .then(() => {
-      profileAvatar.src = profilePopup.querySelector(
-        ".popup__input_type_link"
-      ).value;
+      profileAvatar.src = linkNewPhoto
       closePopup(profilePopup);
       formPhotoProfile.reset();
     })
-    .catch((err) => console.err(`Ошибка редактирования фотографии - `, err))
+    .catch((err) => console.log(`Ошибка редактирования фотографии - `, err))
     .finally(() => {
       renderLoading(false, profilePopup, popupSaveDefaultText);
     });
@@ -86,7 +86,6 @@ function submitFormHandlerPhoto(evt) {
   const titleInputActually = titleInput.value;
   const linkInputActually = linkInput.value;
   postCard(titleInputActually, linkInputActually)
-    .then(responseCheck)
     .then((result) => {
       cards.prepend(
         createCard(titleInputActually, linkInputActually, 0, result._id)

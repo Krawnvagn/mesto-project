@@ -22,7 +22,6 @@
 
 .popup__input:focus {
   outline: none;
-  border-bottom: 1px solid grey;
 }
 
 /* .popup__input:invalid {

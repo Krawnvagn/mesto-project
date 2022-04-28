@@ -43,7 +43,7 @@ export const patchUserAvatar = (link) => {
     body: JSON.stringify({
       avatar: link,
     }),
-  });
+  }).then(responseCheck);
 };
 // 5
 export const postCard = (title, link) => {
@@ -54,37 +54,37 @@ export const postCard = (title, link) => {
       name: title,
       link: link,
     }),
-  });
+  }).then(responseCheck);
 };
 // 6
 export const deleteLikeCard = (cardId) => {
   return fetch(`${config.baseUrl}cards/likes/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  });
+  }).then(responseCheck);
 };
 // 7
 export const putLikeCard = (cardId) => {
   return fetch(`${config.baseUrl}cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers,
-  });
+  }).then(responseCheck);
 };
 // 8
 export const deleteCard = (cardId) => {
   return fetch(`${config.baseUrl}cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  })
-}
+  }).then(responseCheck);
+};
 // 9
 export const patchUserChange = (name, job) => {
   return fetch(`${config.baseUrl}users/me`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
-      name: nameInput.value,
-      about: jobInput.value,
+      name: name,
+      about: job,
     }),
-  })
-}
+  }).then(responseCheck);
+};

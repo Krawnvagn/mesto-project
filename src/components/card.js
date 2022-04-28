@@ -38,7 +38,6 @@ export const initialCards = [
 function handleLikeCard(evt, likesRef, cardId) {
   if (evt.target.classList.contains("card__like_active")) {
     deleteLikeCard(cardId)
-      .then(responseCheck)
       .then((res) => {
         likesRef.textContent = res.likes.length;
         evt.target.classList.remove("card__like_active");
@@ -46,7 +45,6 @@ function handleLikeCard(evt, likesRef, cardId) {
       .catch((err) => console.log(err));
   } else {
     putLikeCard(cardId)
-      .then(responseCheck)
       .then((res) => {
         likesRef.textContent = res.likes.length;
         evt.target.classList.add("card__like_active");
@@ -80,6 +78,7 @@ export function createCard(name, link, likes, cardId, cardOwner, user) {
   if (cardOwner !== user) {
     cardDel.remove();
   }
+
   if (likes.some((like) => like._id === user)) {
     cardLike.classList.add("card__like_active");
   }

@@ -1,4 +1,4 @@
-import { config } from "./api.js";
+import { patchUserChange, responseCheck } from "./api.js";
 import {
   popups,
   profileTitle,
@@ -16,14 +16,13 @@ export function submitFormHandlerEdit(evt) {
     popupEdit.querySelector(".popup__save").innerText;
   renderLoading(true, popupEdit);
   patchUserChange(nameInput.value, jobInput.value)
-    .then(responseCheck)
     .then(() => {
       profileTitle.textContent = nameInput.value;
       profileSubTitle.textContent = jobInput.value;
       closePopup(popupEdit);
       formEdit.reset();
     })
-    .catch((err) => console.err("Ошибка при редактировании профиля - ", err))
+    .catch((err) => console.log("Ошибка при редактировании профиля - ", err))
     .finally(() => {
       renderLoading(false, popupEdit, popupSaveDefaultText);
     });
