@@ -76,11 +76,6 @@ photoAdd.addEventListener("click", () => {
   openPopup(popupPhoto);
 });
 
-// СТЕРЕТЬ
-// export function addCard(container, cardElement) {
-//   container.prepend(cardElement);
-// }
-
 let user;
 
 Promise.all([getUserInfo(), getCards()])
@@ -116,7 +111,6 @@ function submitFormHandlerPhoto(evt) {
   postCard(titleInputActually, linkInputActually)
     .then((card) => {
       cards.prepend(
-        // createCard(titleInputActually, linkInputActually, 0, /* card._id */, /* card.owner._id */, /* user */)
         createCard(
           titleInputActually,
           linkInputActually,

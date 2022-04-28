@@ -1,10 +1,6 @@
 import { cardTemplate, photoCard, linkPhoto, titlePhoto } from "./constants.js";
 import { openPopup } from "./utils.js";
-import {
-  deleteCard,
-  deleteLikeCard,
-  putLikeCard,
-} from "./api.js";
+import { deleteCard, deleteLikeCard, putLikeCard } from "./api.js";
 
 export const initialCards = [
   {
