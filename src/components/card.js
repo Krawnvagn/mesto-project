@@ -1,11 +1,9 @@
 import { cardTemplate, photoCard, linkPhoto, titlePhoto } from "./constants.js";
 import { openPopup } from "./utils.js";
 import {
-  config,
   deleteCard,
   deleteLikeCard,
   putLikeCard,
-  responseCheck,
 } from "./api.js";
 
 export const initialCards = [
@@ -78,7 +76,6 @@ export function createCard(name, link, likes, cardId, cardOwner, user) {
   if (cardOwner !== user) {
     cardDel.remove();
   }
-
   if (likes.some((like) => like._id === user)) {
     cardLike.classList.add("card__like_active");
   }

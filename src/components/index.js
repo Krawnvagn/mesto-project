@@ -2,7 +2,12 @@ import "../pages/index.css";
 
 import { createCard } from "./card.js";
 import { submitFormHandlerEdit } from "./modal.js";
-import { closePopup, openPopup, renderLoading, hiddenValidation } from "./utils.js";
+import {
+  closePopup,
+  openPopup,
+  renderLoading,
+  hiddenValidation,
+} from "./utils.js";
 import {
   cards,
   formEdit,
@@ -27,14 +32,7 @@ import {
   blockSumbitButtonAfterSendForm,
   enableValidation,
 } from "./validate.js";
-import {
-  getUserInfo,
-  getCards,
-  config,
-  patchUserAvatar,
-  postCard,
-  responseCheck,
-} from "./api.js";
+import { getUserInfo, getCards, patchUserAvatar, postCard } from "./api.js";
 
 profileAvatarShow.addEventListener("click", () => {
   const buttonSaveSubmit = formPhotoProfile.querySelector(".popup__save");
@@ -52,7 +50,7 @@ function submitFormHandlerChangePhoto(evt) {
   ).value;
   patchUserAvatar(linkNewPhoto)
     .then(() => {
-      profileAvatar.src = linkNewPhoto
+      profileAvatar.src = linkNewPhoto;
       closePopup(profilePopup);
       formPhotoProfile.reset();
     })
@@ -78,31 +76,16 @@ photoAdd.addEventListener("click", () => {
   openPopup(popupPhoto);
 });
 
-function submitFormHandlerPhoto(evt) {
-  evt.preventDefault();
-  const popupSaveDefaultText =
-    popupPhoto.querySelector(".popup__save").innerText;
-  renderLoading(true, popupPhoto);
-  const titleInputActually = titleInput.value;
-  const linkInputActually = linkInput.value;
-  postCard(titleInputActually, linkInputActually)
-    .then((result) => {
-      cards.prepend(
-        createCard(titleInputActually, linkInputActually, 0, result._id)
-      );
-      closePopup(popupPhoto);
-      formPhoto.reset();
-    })
-    .finally(() => {
-      renderLoading(false, popupPhoto, popupSaveDefaultText);
-    });
-}
+// СТЕРЕТЬ
+// export function addCard(container, cardElement) {
+//   container.prepend(cardElement);
+// }
 
 let user;
 
 Promise.all([getUserInfo(), getCards()])
   .then(([userData, cardsData]) => {
-    user = userData._id
+    user = userData._id;
     profileAvatar.src = userData.avatar;
     profileTitle.textContent = userData.name;
     profileSubTitle.textContent = userData.about;
@@ -122,6 +105,34 @@ Promise.all([getUserInfo(), getCards()])
   .catch((err) => {
     console.log("Ошибка с сервера - ", err);
   });
+
+function submitFormHandlerPhoto(evt) {
+  evt.preventDefault();
+  const popupSaveDefaultText =
+    popupPhoto.querySelector(".popup__save").innerText;
+  renderLoading(true, popupPhoto);
+  const titleInputActually = titleInput.value;
+  const linkInputActually = linkInput.value;
+  postCard(titleInputActually, linkInputActually)
+    .then((card) => {
+      cards.prepend(
+        // createCard(titleInputActually, linkInputActually, 0, /* card._id */, /* card.owner._id */, /* user */)
+        createCard(
+          titleInputActually,
+          linkInputActually,
+          card.likes,
+          card._id,
+          card.owner._id,
+          user
+        )
+      );
+      closePopup(popupPhoto);
+      formPhoto.reset();
+    })
+    .finally(() => {
+      renderLoading(false, popupPhoto, popupSaveDefaultText);
+    });
+}
 
 formPhoto.addEventListener("submit", submitFormHandlerPhoto);
 formEdit.addEventListener("submit", submitFormHandlerEdit);

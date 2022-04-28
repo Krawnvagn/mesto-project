@@ -1,4 +1,4 @@
-import { patchUserChange, responseCheck } from "./api.js";
+import { patchUserChange } from "./api.js";
 import {
   popups,
   profileTitle,
