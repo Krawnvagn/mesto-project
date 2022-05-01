@@ -5,6 +5,7 @@ export const responseCheck = (res) => {
     return Promise.reject(`Ошибка: code ${res.status}`);
   }
 };
+
 export const config = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-9/",
   headers: {
@@ -12,6 +13,7 @@ export const config = {
     "Content-Type": "application/json",
   },
 };
+
 export const getUserInfo = () => {
   return fetch(`${config.baseUrl}users/me`, {
     headers: config.headers,
@@ -22,6 +24,7 @@ export const getUserInfo = () => {
       return res;
     });
 };
+
 export const getCards = () => {
   return fetch(`${config.baseUrl}cards`, {
     headers: config.headers,
@@ -32,6 +35,7 @@ export const getCards = () => {
       return res;
     });
 };
+
 export const patchUserAvatar = (link) => {
   return fetch(`${config.baseUrl}users/me/avatar`, {
     method: "PATCH",
@@ -41,6 +45,7 @@ export const patchUserAvatar = (link) => {
     }),
   }).then(responseCheck);
 };
+
 export const postCard = (title, link) => {
   return fetch(`${config.baseUrl}cards`, {
     method: "POST",
@@ -51,24 +56,28 @@ export const postCard = (title, link) => {
     }),
   }).then(responseCheck);
 };
+
 export const deleteLikeCard = (cardId) => {
   return fetch(`${config.baseUrl}cards/likes/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
   }).then(responseCheck);
 };
+
 export const putLikeCard = (cardId) => {
   return fetch(`${config.baseUrl}cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers,
   }).then(responseCheck);
 };
+
 export const deleteCard = (cardId) => {
   return fetch(`${config.baseUrl}cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
   }).then(responseCheck);
 };
+
 export const patchUserChange = (name, job) => {
   return fetch(`${config.baseUrl}users/me`, {
     method: "PATCH",
