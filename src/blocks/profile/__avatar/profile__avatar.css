@@ -1,4 +1,3 @@
-.profile__avatar-hover,
 .profile__avatar {
   width: 120px;
   height: 120px;
@@ -8,27 +7,12 @@
   position: relative;
 }
 
-.profile__avatar-hover {
-  position: absolute;
-  transition: background-color .1s; 
-}
-
-.profile__avatar-hover:hover {
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.8);
-  background-image: url(../../../images/pencil.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-}
-
 .profile__avatar:hover + .profile__avatar-hover {
   background: rgba(0, 0, 0, 0.8);
 }
 
 @media (min-width: 320px) and (max-width: 1279px) {
-  .profile__avatar,
-  .profile__avatar-hover {
+  .profile__avatar {
     margin-bottom: 24px;
   }
 }
