@@ -3,7 +3,7 @@
 ### Обзор
 
 * Figma
-* Картинки
+* Технологии
 
 **Figma**
 
@@ -11,7 +11,7 @@
 
 **Технологии**
 
-* Были применены технологии HTML и CSS а также навыки адаптивной вёрстки.
+* Были применены технологии HTML и CSS, JS + Webpack.
 
 * [Ссылка на проект в Github](https://github.com/demiz99/mesto-project)
 * [Ссылка на проект в Github Pages](https://demiz99.github.io/mesto-project/)
