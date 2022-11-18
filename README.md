@@ -13,5 +13,5 @@
 
 * Были применены технологии HTML и CSS, JS + Webpack.
 
-* [Ссылка на проект в Github](https://github.com/demiz99/mesto-project)
-* [Ссылка на проект в Github Pages](https://demiz99.github.io/mesto-project/)
+* [Ссылка на проект в Github](https://github.com/randomu3/mesto-project)
+* [Ссылка на проект в Github Pages](https://randomu3.github.io/mesto-project/)
