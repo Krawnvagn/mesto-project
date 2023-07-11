@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "dev": "webpack serve",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && scp -Cr ./build/* demiz@51.250.17.104:/home/demiz/mesto-frontend"
   },
   "repository": {
     "type": "git",
